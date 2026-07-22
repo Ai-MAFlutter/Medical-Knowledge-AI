@@ -1,0 +1,29 @@
+# LLM
+groq
+openai
+python-dotenv
+
+# Data Processing
+pandas
+numpy
+
+# Search & Retrieval
+minsearch
+
+# Embeddings
+sentence-transformers
+
+# Vector Database
+qdrant-client
+
+# Web Application
+streamlit
+
+# Visualization
+plotly
+
+# Evaluation
+tqdm
+
+# Testing
+pytest

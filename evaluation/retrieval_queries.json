@@ -1,0 +1,1052 @@
+[
+  {
+    "query": "What is A1C?",
+    "relevant_document_ids": [
+      "medlineplus_0000"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain A1C?",
+    "relevant_document_ids": [
+      "medlineplus_0000"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about A1C?",
+    "relevant_document_ids": [
+      "medlineplus_0000"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Abdominal Pain?",
+    "relevant_document_ids": [
+      "medlineplus_0001"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Abdominal Pain?",
+    "relevant_document_ids": [
+      "medlineplus_0001"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Abdominal Pain?",
+    "relevant_document_ids": [
+      "medlineplus_0001"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Abortion?",
+    "relevant_document_ids": [
+      "medlineplus_0002"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Abortion?",
+    "relevant_document_ids": [
+      "medlineplus_0002"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Abortion?",
+    "relevant_document_ids": [
+      "medlineplus_0002"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Abscess?",
+    "relevant_document_ids": [
+      "medlineplus_0005"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Abscess?",
+    "relevant_document_ids": [
+      "medlineplus_0005"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Abscess?",
+    "relevant_document_ids": [
+      "medlineplus_0005"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Acne?",
+    "relevant_document_ids": [
+      "medlineplus_0012"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Acne?",
+    "relevant_document_ids": [
+      "medlineplus_0012"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Acne?",
+    "relevant_document_ids": [
+      "medlineplus_0012"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Acoustic Neuroma?",
+    "relevant_document_ids": [
+      "medlineplus_0014"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Acoustic Neuroma?",
+    "relevant_document_ids": [
+      "medlineplus_0014"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Acoustic Neuroma?",
+    "relevant_document_ids": [
+      "medlineplus_0014"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Acupuncture?",
+    "relevant_document_ids": [
+      "medlineplus_0015"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Acupuncture?",
+    "relevant_document_ids": [
+      "medlineplus_0015"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Acupuncture?",
+    "relevant_document_ids": [
+      "medlineplus_0015"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Acute Bronchitis?",
+    "relevant_document_ids": [
+      "medlineplus_0017"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Acute Bronchitis?",
+    "relevant_document_ids": [
+      "medlineplus_0017"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Acute Bronchitis?",
+    "relevant_document_ids": [
+      "medlineplus_0017"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Acute Flaccid Myelitis?",
+    "relevant_document_ids": [
+      "medlineplus_0018"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Acute Flaccid Myelitis?",
+    "relevant_document_ids": [
+      "medlineplus_0018"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Acute Flaccid Myelitis?",
+    "relevant_document_ids": [
+      "medlineplus_0018"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Acute Lymphocytic Leukemia?",
+    "relevant_document_ids": [
+      "medlineplus_0019"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Acute Lymphocytic Leukemia?",
+    "relevant_document_ids": [
+      "medlineplus_0019"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Acute Lymphocytic Leukemia?",
+    "relevant_document_ids": [
+      "medlineplus_0019"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Acute Myeloid Leukemia?",
+    "relevant_document_ids": [
+      "medlineplus_0020"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Acute Myeloid Leukemia?",
+    "relevant_document_ids": [
+      "medlineplus_0020"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Acute Myeloid Leukemia?",
+    "relevant_document_ids": [
+      "medlineplus_0020"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Addison Disease?",
+    "relevant_document_ids": [
+      "medlineplus_0021"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Addison Disease?",
+    "relevant_document_ids": [
+      "medlineplus_0021"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Addison Disease?",
+    "relevant_document_ids": [
+      "medlineplus_0021"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Adenoids?",
+    "relevant_document_ids": [
+      "medlineplus_0023"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Adenoids?",
+    "relevant_document_ids": [
+      "medlineplus_0023"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Adenoids?",
+    "relevant_document_ids": [
+      "medlineplus_0023"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Adhesions?",
+    "relevant_document_ids": [
+      "medlineplus_0025"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Adhesions?",
+    "relevant_document_ids": [
+      "medlineplus_0025"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Adhesions?",
+    "relevant_document_ids": [
+      "medlineplus_0025"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Adrenal Gland Cancer?",
+    "relevant_document_ids": [
+      "medlineplus_0027"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Adrenal Gland Cancer?",
+    "relevant_document_ids": [
+      "medlineplus_0027"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Adrenal Gland Cancer?",
+    "relevant_document_ids": [
+      "medlineplus_0027"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Adrenal Gland Disorders?",
+    "relevant_document_ids": [
+      "medlineplus_0028"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Adrenal Gland Disorders?",
+    "relevant_document_ids": [
+      "medlineplus_0028"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Adrenal Gland Disorders?",
+    "relevant_document_ids": [
+      "medlineplus_0028"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Advance Directives?",
+    "relevant_document_ids": [
+      "medlineplus_0029"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Advance Directives?",
+    "relevant_document_ids": [
+      "medlineplus_0029"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Advance Directives?",
+    "relevant_document_ids": [
+      "medlineplus_0029"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is After Surgery?",
+    "relevant_document_ids": [
+      "medlineplus_0033"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain After Surgery?",
+    "relevant_document_ids": [
+      "medlineplus_0033"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about After Surgery?",
+    "relevant_document_ids": [
+      "medlineplus_0033"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Air Pollution?",
+    "relevant_document_ids": [
+      "medlineplus_0038"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Air Pollution?",
+    "relevant_document_ids": [
+      "medlineplus_0038"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Air Pollution?",
+    "relevant_document_ids": [
+      "medlineplus_0038"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Alcohol?",
+    "relevant_document_ids": [
+      "medlineplus_0039"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Alcohol?",
+    "relevant_document_ids": [
+      "medlineplus_0039"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Alcohol?",
+    "relevant_document_ids": [
+      "medlineplus_0039"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Alcohol Use Disorder (AUD)?",
+    "relevant_document_ids": [
+      "medlineplus_0041"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Alcohol Use Disorder (AUD)?",
+    "relevant_document_ids": [
+      "medlineplus_0041"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Alcohol Use Disorder (AUD)?",
+    "relevant_document_ids": [
+      "medlineplus_0041"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Alcohol Use Disorder (AUD) Treatment?",
+    "relevant_document_ids": [
+      "medlineplus_0042"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Alcohol Use Disorder (AUD) Treatment?",
+    "relevant_document_ids": [
+      "medlineplus_0042"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Alcohol Use Disorder (AUD) Treatment?",
+    "relevant_document_ids": [
+      "medlineplus_0042"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Allergy?",
+    "relevant_document_ids": [
+      "medlineplus_0047"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Allergy?",
+    "relevant_document_ids": [
+      "medlineplus_0047"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Allergy?",
+    "relevant_document_ids": [
+      "medlineplus_0047"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Alpha-1 Antitrypsin Deficiency?",
+    "relevant_document_ids": [
+      "medlineplus_0048"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Alpha-1 Antitrypsin Deficiency?",
+    "relevant_document_ids": [
+      "medlineplus_0048"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Alpha-1 Antitrypsin Deficiency?",
+    "relevant_document_ids": [
+      "medlineplus_0048"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Alzheimer's Caregivers?",
+    "relevant_document_ids": [
+      "medlineplus_0049"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Alzheimer's Caregivers?",
+    "relevant_document_ids": [
+      "medlineplus_0049"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Alzheimer's Caregivers?",
+    "relevant_document_ids": [
+      "medlineplus_0049"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Alzheimer's Disease?",
+    "relevant_document_ids": [
+      "medlineplus_0050"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Alzheimer's Disease?",
+    "relevant_document_ids": [
+      "medlineplus_0050"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Alzheimer's Disease?",
+    "relevant_document_ids": [
+      "medlineplus_0050"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Amblyopia?",
+    "relevant_document_ids": [
+      "medlineplus_0052"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Amblyopia?",
+    "relevant_document_ids": [
+      "medlineplus_0052"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Amblyopia?",
+    "relevant_document_ids": [
+      "medlineplus_0052"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Amino Acid Metabolism Disorders?",
+    "relevant_document_ids": [
+      "medlineplus_0055"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Amino Acid Metabolism Disorders?",
+    "relevant_document_ids": [
+      "medlineplus_0055"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Amino Acid Metabolism Disorders?",
+    "relevant_document_ids": [
+      "medlineplus_0055"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Amyloidosis?",
+    "relevant_document_ids": [
+      "medlineplus_0057"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Amyloidosis?",
+    "relevant_document_ids": [
+      "medlineplus_0057"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Amyloidosis?",
+    "relevant_document_ids": [
+      "medlineplus_0057"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Amyotrophic Lateral Sclerosis?",
+    "relevant_document_ids": [
+      "medlineplus_0058"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Amyotrophic Lateral Sclerosis?",
+    "relevant_document_ids": [
+      "medlineplus_0058"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Amyotrophic Lateral Sclerosis?",
+    "relevant_document_ids": [
+      "medlineplus_0058"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Anabolic Steroids?",
+    "relevant_document_ids": [
+      "medlineplus_0059"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Anabolic Steroids?",
+    "relevant_document_ids": [
+      "medlineplus_0059"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Anabolic Steroids?",
+    "relevant_document_ids": [
+      "medlineplus_0059"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Anal Cancer?",
+    "relevant_document_ids": [
+      "medlineplus_0061"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Anal Cancer?",
+    "relevant_document_ids": [
+      "medlineplus_0061"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Anal Cancer?",
+    "relevant_document_ids": [
+      "medlineplus_0061"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Anal Disorders?",
+    "relevant_document_ids": [
+      "medlineplus_0062"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Anal Disorders?",
+    "relevant_document_ids": [
+      "medlineplus_0062"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Anal Disorders?",
+    "relevant_document_ids": [
+      "medlineplus_0062"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Anaphylaxis?",
+    "relevant_document_ids": [
+      "medlineplus_0064"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Anaphylaxis?",
+    "relevant_document_ids": [
+      "medlineplus_0064"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Anaphylaxis?",
+    "relevant_document_ids": [
+      "medlineplus_0064"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Anatomy?",
+    "relevant_document_ids": [
+      "medlineplus_0065"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Anatomy?",
+    "relevant_document_ids": [
+      "medlineplus_0065"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Anatomy?",
+    "relevant_document_ids": [
+      "medlineplus_0065"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Anemia?",
+    "relevant_document_ids": [
+      "medlineplus_0067"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Anemia?",
+    "relevant_document_ids": [
+      "medlineplus_0067"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Anemia?",
+    "relevant_document_ids": [
+      "medlineplus_0067"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Anesthesia?",
+    "relevant_document_ids": [
+      "medlineplus_0071"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Anesthesia?",
+    "relevant_document_ids": [
+      "medlineplus_0071"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Anesthesia?",
+    "relevant_document_ids": [
+      "medlineplus_0071"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Aneurysms?",
+    "relevant_document_ids": [
+      "medlineplus_0075"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Aneurysms?",
+    "relevant_document_ids": [
+      "medlineplus_0075"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Aneurysms?",
+    "relevant_document_ids": [
+      "medlineplus_0075"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Angina?",
+    "relevant_document_ids": [
+      "medlineplus_0076"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Angina?",
+    "relevant_document_ids": [
+      "medlineplus_0076"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Angina?",
+    "relevant_document_ids": [
+      "medlineplus_0076"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Angioplasty?",
+    "relevant_document_ids": [
+      "medlineplus_0078"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Angioplasty?",
+    "relevant_document_ids": [
+      "medlineplus_0078"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Angioplasty?",
+    "relevant_document_ids": [
+      "medlineplus_0078"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Animal Bites?",
+    "relevant_document_ids": [
+      "medlineplus_0080"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Animal Bites?",
+    "relevant_document_ids": [
+      "medlineplus_0080"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Animal Bites?",
+    "relevant_document_ids": [
+      "medlineplus_0080"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Animal Diseases and Your Health?",
+    "relevant_document_ids": [
+      "medlineplus_0081"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Animal Diseases and Your Health?",
+    "relevant_document_ids": [
+      "medlineplus_0081"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Animal Diseases and Your Health?",
+    "relevant_document_ids": [
+      "medlineplus_0081"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Ankle Injuries and Disorders?",
+    "relevant_document_ids": [
+      "medlineplus_0082"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Ankle Injuries and Disorders?",
+    "relevant_document_ids": [
+      "medlineplus_0082"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Ankle Injuries and Disorders?",
+    "relevant_document_ids": [
+      "medlineplus_0082"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Ankylosing Spondylitis?",
+    "relevant_document_ids": [
+      "medlineplus_0083"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Ankylosing Spondylitis?",
+    "relevant_document_ids": [
+      "medlineplus_0083"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Ankylosing Spondylitis?",
+    "relevant_document_ids": [
+      "medlineplus_0083"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Anthrax?",
+    "relevant_document_ids": [
+      "medlineplus_0087"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Anthrax?",
+    "relevant_document_ids": [
+      "medlineplus_0087"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Anthrax?",
+    "relevant_document_ids": [
+      "medlineplus_0087"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Antibiotic Resistance?",
+    "relevant_document_ids": [
+      "medlineplus_0088"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Antibiotic Resistance?",
+    "relevant_document_ids": [
+      "medlineplus_0088"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Antibiotic Resistance?",
+    "relevant_document_ids": [
+      "medlineplus_0088"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Antibiotics?",
+    "relevant_document_ids": [
+      "medlineplus_0089"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Antibiotics?",
+    "relevant_document_ids": [
+      "medlineplus_0089"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Antibiotics?",
+    "relevant_document_ids": [
+      "medlineplus_0089"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Antidepressants?",
+    "relevant_document_ids": [
+      "medlineplus_0093"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Antidepressants?",
+    "relevant_document_ids": [
+      "medlineplus_0093"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Antidepressants?",
+    "relevant_document_ids": [
+      "medlineplus_0093"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Antioxidants?",
+    "relevant_document_ids": [
+      "medlineplus_0095"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Antioxidants?",
+    "relevant_document_ids": [
+      "medlineplus_0095"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Antioxidants?",
+    "relevant_document_ids": [
+      "medlineplus_0095"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What is Anxiety?",
+    "relevant_document_ids": [
+      "medlineplus_0096"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "Can you explain Anxiety?",
+    "relevant_document_ids": [
+      "medlineplus_0096"
+    ],
+    "language": "en"
+  },
+  {
+    "query": "What should I know about Anxiety?",
+    "relevant_document_ids": [
+      "medlineplus_0096"
+    ],
+    "language": "en"
+  }
+]
