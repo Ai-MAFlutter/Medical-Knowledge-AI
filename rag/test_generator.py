@@ -15,10 +15,10 @@ def main():
     query = "What is an A1C test?"
     user_level = "beginner"
 
-    print(f"\nUser Query:")
+    print("\nUser Query:")
     print(query)
 
-    print(f"\nUser Level:")
+    print("\nUser Level:")
     print(user_level)
 
     # ============================================================
@@ -35,28 +35,82 @@ def main():
 
     print("\nRetrieving medical documents...")
 
-    retrieval_result = pipeline.retrieve(query)
+    retrieval_result = pipeline.retrieve(
+        query=query,
+        user_type="general",
+        explanation_level=user_level,
+        candidate_k=10,
+        final_k=5
+    )
 
     # ============================================================
-    # EXTRACT DOCUMENTS CORRECTLY
+    # VALIDATE RETRIEVAL RESULT
     # ============================================================
 
-    if isinstance(retrieval_result, dict):
-
-        documents = retrieval_result.get("documents", [])
-
-    elif isinstance(retrieval_result, list):
-
-        documents = retrieval_result
-
-    else:
+    if not isinstance(retrieval_result, dict):
 
         raise TypeError(
-            f"Unexpected retrieval result type: "
-            f"{type(retrieval_result)}"
+            "Expected retrieval pipeline to return a dictionary."
         )
 
-    print(f"\nRetrieved documents: {len(documents)}")
+    # ============================================================
+    # EXTRACT DATA
+    # ============================================================
+
+    rewritten_query = retrieval_result.get(
+        "rewritten_query",
+        {}
+    )
+
+    candidates = retrieval_result.get(
+        "candidates",
+        []
+    )
+
+    documents = retrieval_result.get(
+        "documents",
+        []
+    )
+
+    # ============================================================
+    # DISPLAY RETRIEVAL SUMMARY
+    # ============================================================
+
+    print("\n" + "=" * 70)
+    print("RETRIEVAL SUMMARY")
+    print("=" * 70)
+
+    print(
+        f"\nOriginal Query:\n"
+        f"{query}"
+    )
+
+    if isinstance(rewritten_query, dict):
+
+        print(
+            f"\nRewritten Query:\n"
+            f"{rewritten_query.get('rewritten_query', '')}"
+        )
+
+        print(
+            f"\nSearch Intent:\n"
+            f"{rewritten_query.get('search_intent', '')}"
+        )
+
+        print(
+            f"\nMedical Entities:\n"
+            f"{rewritten_query.get('medical_entities', [])}"
+        )
+
+    print(
+        f"\nCandidate Documents Retrieved: "
+        f"{len(candidates)}"
+    )
+
+    print(
+        f"Final Documents Selected: "
+        f"{len(documents)}"
+    )
 
     # ============================================================
     # SAFETY CHECK
@@ -64,15 +118,54 @@ def main():
 
     if not documents:
 
-        print("\nNo relevant medical documents found.")
+        print(
+            "\nNo relevant medical documents were found."
+        )
 
         return
+
+    # ============================================================
+    # DISPLAY SOURCES
+    # ============================================================
+
+    print("\n" + "=" * 70)
+    print("SELECTED MEDICAL SOURCES")
+    print("=" * 70)
+
+    for index, document in enumerate(
+        documents,
+        start=1
+    ):
+
+        print(f"\nSOURCE {index}")
+
+        print(
+            f"Title: "
+            f"{document.get('title', '')}"
+        )
+
+        print(
+            f"Category: "
+            f"{document.get('category', '')}"
+        )
+
+        print(
+            f"Rerank Score: "
+            f"{document.get('rerank_score', 0):.4f}"
+        )
+
+        print(
+            f"Source URL: "
+            f"{document.get('source_url', '')}"
+        )
 
     # ============================================================
     # GENERATE ANSWER
     # ============================================================
 
-    print("\nGenerating answer...")
+    print("\n" + "=" * 70)
+    print("GENERATING ANSWER")
+    print("=" * 70)
 
     answer = generate_answer(
         query=query,
@@ -90,8 +183,12 @@ def main():
 
     print(answer)
 
+    # ============================================================
+    # COMPLETION
+    # ============================================================
+
     print("\n" + "=" * 70)
-    print("TEST COMPLETED")
+    print("RAG GENERATION TEST COMPLETED")
     print("=" * 70)
 
 
