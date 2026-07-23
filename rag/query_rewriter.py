@@ -1,25 +1,14 @@
 import os
 import json
-from openai import OpenAI
 from dotenv import load_dotenv
-
-
-# ============================================================
-# LOAD ENVIRONMENT VARIABLES
-# ============================================================
+from openai import OpenAI
 
 load_dotenv()
-
-
-# ============================================================
-# LLM CLIENT
-# ============================================================
 
 client = OpenAI(
     api_key=os.getenv("GROQ_API_KEY"),
     base_url="https://api.groq.com/openai/v1"
 )
-
 
 MODEL_NAME = os.getenv(
     "GROQ_MODEL",

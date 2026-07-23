@@ -1,171 +1,515 @@
 {
   "summary": {
-    "total_queries": 10,
-    "successful_queries": 10,
-    "failed_queries": 0,
-    "average_quality_score": 1.0,
-    "average_latency_seconds": 11.46
+    "baseline": {
+      "total_queries": 10,
+      "successful_queries": 10,
+      "average_quality_score": 0.8,
+      "average_latency_seconds": 1.1
+    },
+    "rag": {
+      "total_queries": 10,
+      "successful_queries": 10,
+      "average_quality_score": 1.0,
+      "average_latency_seconds": 12.38
+    },
+    "improved_rag": {
+      "total_queries": 10,
+      "successful_queries": 10,
+      "average_quality_score": 1.0,
+      "average_latency_seconds": 13.09
+    },
+    "winner": "rag"
   },
   "results": [
     {
       "query": "What is an A1C test?",
       "user_level": "beginner",
       "retrieved_documents": 5,
-      "answer": "## Direct Answer\nAn A1C test is a blood test that measures your average blood glucose, or blood sugar, level over the past 3 months.\n\n## Explanation\nThe A1C test is used to diagnose type 2 diabetes and prediabetes. It's different from the daily blood sugar checks that people with diabetes do. The test result is given as a percentage, and the higher the percentage, the higher your blood sugar levels have been. For example, a normal A1C level is below 5.7%, while prediabetes is between 5.7 to 6.4%, and type 2 diabetes is above 6.5%.\n\n## Important Points\n- The A1C test is used to diagnose and manage diabetes.\n- The test result is given as a percentage.\n- A normal A1C level is below 5.7%.\n- Prediabetes is between 5.7 to 6.4%.\n- Type 2 diabetes is above 6.5%.\n- If you have diabetes, you should have the A1C test at least twice a year.\n\n## Educational Disclaimer\nThis information is intended for educational purposes only and should not be used to diagnose or treat any medical condition. If you have concerns about your blood sugar levels or diabetes, please consult a qualified healthcare professional for personalized advice and care.",
-      "quality_score": 1.0,
-      "quality_checks": {
-        "has_answer": true,
-        "has_direct_answer": true,
-        "has_explanation": true,
-        "has_disclaimer": true,
-        "grounded_in_context": true
-      },
-      "latency_seconds": 3.56,
-      "status": "success"
+      "approaches": {
+        "baseline": {
+          "approach": "baseline",
+          "answer": "## Direct Answer\nAn A1C test is a blood test that measures the average level of glucose (sugar) in your blood over the past 2-3 months.\n\n## Explanation\nThe A1C test works by measuring the amount of glucose that has attached to hemoglobin, a protein in red blood cells. Hemoglobin is responsible for carrying oxygen throughout the body. When glucose is present in the blood, it binds to hemoglobin, forming a molecule called glycated hemoglobin or HbA1c. The more glucose in the blood, the more hemoglobin gets glycated. By measuring the percentage of glycated hemoglobin, healthcare providers can get an idea of how well blood sugar levels have been controlled over time.\n\n## Important Points\nThe A1C test is commonly used to diagnose and manage diabetes. It's also used to monitor the effectiveness of treatment plans for people with diabetes. The test results are usually reported as a percentage, with lower percentages indicating better blood sugar control. For example, an A1C level of 7% or below is often considered a target for people with diabetes.\n\n## Educational Disclaimer\nThis information is intended for educational purposes only and should not be used to diagnose or treat any medical condition. If you have concerns about your blood sugar levels or diabetes, please consult a qualified healthcare professional for personalized advice and care. They can help you interpret your A1C test results and develop a plan to manage your condition.",
+          "quality_score": 0.8,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": false
+          },
+          "latency_seconds": 1.13,
+          "status": "success"
+        },
+        "rag": {
+          "approach": "rag",
+          "answer": "## Direct Answer\nAn A1C test is a blood test that measures your average blood glucose, or blood sugar, level over the past 3 months.\n\n## Explanation\nThe A1C test is used to diagnose type 2 diabetes and prediabetes. It's different from the daily blood sugar checks that people with diabetes do. The test result is given in percentages, and the higher the percentage, the higher your blood sugar levels have been. This test helps doctors see how well you're managing your diabetes.\n\n## Important Points\n* A normal A1C level is below 5.7%\n* Prediabetes is between 5.7 to 6.4%\n* Type 2 diabetes is above 6.5%\n* The A1C test is usually done at least twice a year for people with diabetes\n* The test result helps doctors adjust your diabetes care plan if needed\n\n## Educational Disclaimer\nPlease note that this information is for educational purposes only and should not be used to diagnose or treat any medical condition. If you have concerns about your blood sugar levels or diabetes, consult a qualified healthcare professional for personalized advice and care. They can provide you with a proper diagnosis, treatment plan, and guidance on managing your condition.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 0.95,
+          "status": "success"
+        },
+        "improved_rag": {
+          "approach": "improved_rag",
+          "answer": "## Direct Answer\n\nAn A1C test is a blood test that measures a person's average blood glucose, or blood sugar, level over the past 3 months.\n\n## Explanation\n\nThe A1C test is used to diagnose type 2 diabetes and prediabetes, and to monitor how well a person is managing their diabetes. It is different from daily blood sugar checks and provides a comprehensive picture of a person's blood glucose levels over time. The test result is given as a percentage, with higher percentages indicating higher blood sugar levels.\n\n## Important Points\n\n* The A1C test measures average blood glucose levels over the past 3 months.\n* The test is used to diagnose type 2 diabetes and prediabetes.\n* A normal A1C level is below 5.7%, while prediabetes is between 5.7% and 6.4%, and type 2 diabetes is above 6.5%.\n* The test is also used to monitor how well a person is managing their diabetes.\n* People with diabetes should have the A1C test at least twice a year.\n\n## Educational Disclaimer\n\nThis information is for educational purposes only and does not replace advice from a qualified healthcare professional. If you have any concerns about your blood glucose levels or diabetes management, please consult with your healthcare provider.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 0.91,
+          "status": "success"
+        }
+      }
     },
     {
       "query": "What causes high blood pressure?",
       "user_level": "beginner",
       "retrieved_documents": 5,
-      "answer": "## Direct Answer\nHigh blood pressure is caused by various factors, including lifestyle habits, age, race, sex, family history, and genetics.\n\n## Explanation\nHigh blood pressure, also known as hypertension, occurs when the force of blood pushing against the walls of arteries is too high. This can be due to a combination of factors such as eating too much sodium, lack of exercise, drinking too much alcohol, and smoking. Additionally, age, race, and sex can also play a role in increasing the risk of developing high blood pressure. For example, blood pressure tends to rise with age, and high blood pressure is more common in Black adults. Family history and genetics can also contribute to the development of high blood pressure.\n\n## Important Points\n- Lifestyle habits such as a high-sodium diet, lack of exercise, and excessive alcohol consumption can increase the risk of high blood pressure.\n- Age, race, and sex can also contribute to the development of high blood pressure.\n- Family history and genetics can play a role in increasing the risk of high blood pressure.\n- High blood pressure can lead to serious health problems such as heart attack, stroke, heart failure, and kidney failure if left unmanaged.\n\n## Educational Disclaimer\nThis information is intended for educational purposes only and should not be used to diagnose or treat any medical condition. If you have concerns about your blood pressure or overall health, please consult a qualified healthcare professional for personalized advice and care. Remember, it's essential to work with a healthcare provider to develop a treatment plan that's right for you.",
-      "quality_score": 1.0,
-      "quality_checks": {
-        "has_answer": true,
-        "has_direct_answer": true,
-        "has_explanation": true,
-        "has_disclaimer": true,
-        "grounded_in_context": true
-      },
-      "latency_seconds": 2.37,
-      "status": "success"
+      "approaches": {
+        "baseline": {
+          "approach": "baseline",
+          "answer": "## Direct Answer\nHigh blood pressure, also known as hypertension, is caused by a combination of factors that affect the force of blood against the walls of the arteries.\n\n## Explanation\nThe causes of high blood pressure can be primary (essential) or secondary. Primary hypertension develops over time and is often the result of a combination of genetic, environmental, and lifestyle factors, such as a family history of high blood pressure, obesity, lack of physical activity, a diet high in salt and sugar, and stress. Secondary hypertension is caused by an underlying medical condition, such as kidney disease, sleep apnea, or certain medications.\n\n## Important Points\nSome key factors that can contribute to high blood pressure include:\n- Age: The risk of high blood pressure increases with age.\n- Family history: Having a family history of high blood pressure can increase your risk.\n- Obesity: Being overweight or obese can increase your risk of developing high blood pressure.\n- Physical inactivity: A lack of physical activity can contribute to high blood pressure.\n- Diet: A diet high in salt, sugar, and saturated fats can increase your risk.\n\n## Educational Disclaimer\nThis information is for educational purposes only and should not be used to diagnose or treat any medical condition. If you have concerns about your blood pressure or overall health, please consult a qualified healthcare professional for personalized advice and care. They can provide a proper diagnosis and recommend appropriate treatment options based on your individual needs.",
+          "quality_score": 0.8,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": false
+          },
+          "latency_seconds": 0.97,
+          "status": "success"
+        },
+        "rag": {
+          "approach": "rag",
+          "answer": "## Direct Answer\nHigh blood pressure is caused by a combination of factors, including lifestyle choices, medical conditions, and genetics.\n\n## Explanation\nHigh blood pressure, also called hypertension, occurs when the force of blood against the walls of the arteries is too high. This can be caused by various factors such as an unhealthy diet, lack of exercise, smoking, and excessive alcohol consumption. Certain medical conditions, like kidney disease, diabetes, and sleep apnea, can also contribute to high blood pressure. Additionally, genetics and family history can play a role in the development of high blood pressure.\n\n## Important Points\n* Lifestyle factors that can contribute to high blood pressure:\n  * Eating too much sodium (salt)\n  * Lack of exercise\n  * Drinking too much alcohol\n  * Smoking\n* Medical conditions that can contribute to high blood pressure:\n  * Kidney disease\n  * Diabetes\n  * Sleep apnea\n  * Thyroid problems\n* Other factors that can increase the risk of high blood pressure:\n  * Family history and genetics\n  * Social and economic factors\n  * Certain medications\n\n## Educational Disclaimer\nThis information is intended for educational purposes only and should not be used to diagnose or treat any medical condition. If you have concerns about your blood pressure or overall health, please consult a qualified healthcare professional for personalized advice and care. Remember, it's always important to follow a healthy lifestyle and consult with a healthcare professional to prevent and manage high blood pressure.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 5.31,
+          "status": "success"
+        },
+        "improved_rag": {
+          "approach": "improved_rag",
+          "answer": "## Direct Answer\nHigh blood pressure, also called hypertension, is caused by a combination of factors including lifestyle choices, family history, and certain medical conditions.\n\n## Explanation\nThe provided sources explain that high blood pressure can be caused by various factors such as too much sodium (salt) or not enough potassium, lack of exercise, drinking too much alcohol, and smoking. Additionally, family history and genetics, social and economic factors, certain medicines, and having certain other medical conditions can also contribute to high blood pressure.\n\n## Important Points\n- Lifestyle choices such as diet, physical activity, and alcohol consumption can affect blood pressure.\n- Family history and genetics can increase the risk of high blood pressure.\n- Certain medical conditions, such as diabetes, metabolic syndrome, and thyroid problems, can also contribute to high blood pressure.\n- Social and economic factors, including income, education level, and work schedule, can raise the risk of high blood pressure.\n- Certain medicines, such as antidepressants, decongestants, and hormonal birth control pills, can raise blood pressure.\n\n## Educational Disclaimer\nThis information is for educational purposes only and does not replace advice from a qualified healthcare professional. If you have concerns about high blood pressure, it is essential to consult with a healthcare provider for personalized advice and treatment.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 11.46,
+          "status": "success"
+        }
+      }
     },
     {
       "query": "What are the symptoms of type 2 diabetes?",
       "user_level": "beginner",
       "retrieved_documents": 5,
-      "answer": "## Direct Answer\nThe symptoms of type 2 diabetes include increased thirst and urination, increased hunger, feeling tired, blurred vision, numbness or tingling in the feet or hands, sores that do not heal, and unexplained weight loss.\n\n## Explanation\nType 2 diabetes is a disease where the body doesn't make enough insulin or doesn't use insulin well, causing high blood glucose levels. The symptoms can develop slowly over several years and may be mild, so people might not notice them. It's essential to be aware of these symptoms to seek medical attention if necessary.\n\n## Important Points\nMany people with type 2 diabetes have no symptoms at all. If symptoms are present, they can include:\n- Increased thirst and urination\n- Increased hunger\n- Feeling tired\n- Blurred vision\n- Numbness or tingling in the feet or hands\n- Sores that do not heal\n- Unexplained weight loss\nIt's crucial to consult a healthcare provider for proper diagnosis and treatment.\n\n## Educational Disclaimer\nThis information is intended for educational purposes only and should not be used for self-diagnosis or treatment. If you suspect you have type 2 diabetes or are experiencing any symptoms, please consult a qualified healthcare professional for proper evaluation, diagnosis, and treatment. They can provide personalized advice and help you manage your condition effectively. Remember, only a healthcare professional can provide a accurate diagnosis and recommend appropriate treatment.",
-      "quality_score": 1.0,
-      "quality_checks": {
-        "has_answer": true,
-        "has_direct_answer": true,
-        "has_explanation": true,
-        "has_disclaimer": true,
-        "grounded_in_context": true
-      },
-      "latency_seconds": 2.17,
-      "status": "success"
+      "approaches": {
+        "baseline": {
+          "approach": "baseline",
+          "answer": "## Direct Answer\nThe symptoms of type 2 diabetes can include increased thirst and hunger, fatigue, blurred vision, slow healing of cuts and wounds, tingling or numbness in the hands and feet, and frequent urination.\n\n## Explanation\nType 2 diabetes is a chronic condition that affects the way the body processes blood sugar (glucose). When an individual has type 2 diabetes, their body either resists the effects of insulin — a hormone that regulates the movement of sugar into cells — or doesn't produce enough insulin to maintain a normal glucose level. Over time, high blood sugar levels can lead to various symptoms and potentially serious health problems. The symptoms of type 2 diabetes often develop gradually and may be mild at first, which is why many people do not realize they have the condition.\n\n## Important Points\n- Increased thirst and hunger are common due to high blood sugar levels causing the body to try to flush out the excess glucose through urination, leading to dehydration.\n- Fatigue is a result of the body's cells not receiving the glucose they need for energy.\n- Blurred vision can occur when high blood sugar levels cause the lens in the eye to swell.\n- Slow healing of cuts and wounds is linked to nerve damage and reduced blood flow, common complications of diabetes.\n- Tingling or numbness in the hands and feet, known as neuropathy, is a result of high blood sugar damaging the nerves over time.\n- Frequent urination, especially at night, is a direct consequence of the body trying to eliminate excess glucose.\n\n## Educational Disclaimer\nThis information is intended for educational purposes only and should not be used for self-diagnosis or as a substitute for consultation with a healthcare professional. If you suspect you may have type 2 diabetes or are experiencing any symptoms, it is crucial to consult a doctor or a qualified healthcare provider for proper evaluation, diagnosis, and treatment. Only a healthcare professional can provide a definitive diagnosis and recommend appropriate treatment options.",
+          "quality_score": 0.8,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": false
+          },
+          "latency_seconds": 1.84,
+          "status": "success"
+        },
+        "rag": {
+          "approach": "rag",
+          "answer": "## Direct Answer\nThe symptoms of type 2 diabetes can include increased thirst and urination, increased hunger, feeling tired, blurred vision, numbness or tingling in the feet or hands, sores that do not heal, and unexplained weight loss.\n\n## Explanation\nType 2 diabetes is a disease where the body does not make enough insulin or does not use insulin well. Insulin is a hormone that helps glucose (sugar) get into the cells to give them energy. When the body does not have enough insulin, the glucose stays in the blood and can cause health problems. Many people with type 2 diabetes do not have any symptoms at all, but if they do, the symptoms can develop slowly over several years.\n\n## Important Points\n* Increased thirst and urination\n* Increased hunger\n* Feeling tired\n* Blurred vision\n* Numbness or tingling in the feet or hands\n* Sores that do not heal\n* Unexplained weight loss\n* Symptoms can develop slowly over several years\n* Many people with type 2 diabetes do not have any symptoms at all\n\n## Educational Disclaimer\nThis information is for educational purposes only and should not be used to diagnose or treat any medical condition. If you have concerns about your health, please consult a qualified healthcare professional. They can provide personalized advice and treatment based on your specific needs and medical history.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 16.28,
+          "status": "success"
+        },
+        "improved_rag": {
+          "approach": "improved_rag",
+          "answer": "## Direct Answer\nThe symptoms of type 2 diabetes may include increased thirst and urination, increased hunger, feeling tired, blurred vision, numbness or tingling in the feet or hands, sores that do not heal, and unexplained weight loss.\n\n## Explanation\nAccording to the provided sources, specifically SOURCE 1: \"Diabetes Type 2\", many people with type 2 diabetes have no symptoms at all. If symptoms do occur, they develop slowly over several years and might be so mild that they are not noticed. The listed symptoms are the possible indicators of type 2 diabetes.\n\n## Important Points\n- Many people with type 2 diabetes have no symptoms.\n- Symptoms develop slowly over several years.\n- Possible symptoms include:\n  - Increased thirst and urination\n  - Increased hunger\n  - Feeling tired\n  - Blurred vision\n  - Numbness or tingling in the feet or hands\n  - Sores that do not heal\n  - Unexplained weight loss\n\n## Educational Disclaimer\nThis information is for educational purposes only and does not replace advice from a qualified healthcare professional. It is essential to consult a healthcare provider for accurate diagnosis and treatment of type 2 diabetes.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 16.48,
+          "status": "success"
+        }
+      }
     },
     {
       "query": "What is asthma?",
       "user_level": "beginner",
       "retrieved_documents": 5,
-      "answer": "## Direct Answer\nAsthma is a chronic lung disease that affects the airways, causing them to become inflamed and narrowed, leading to symptoms such as wheezing, coughing, and chest tightness.\n\n## Explanation\nAsthma is a condition where the airways in the lungs become inflamed and narrowed, making it difficult to breathe. This can cause symptoms such as wheezing, coughing, and tightness in the chest. When these symptoms get worse than usual, it is called an asthma attack or flare-up. Asthma can be caused by a variety of factors, including genetics, environment, and exposure to triggers such as allergens, cold air, and tobacco smoke.\n\n## Important Points\n- Asthma is a chronic lung disease that affects people of all ages.\n- The exact cause of asthma is unknown, but genetics and environment are thought to play a role.\n- Symptoms of asthma include wheezing, coughing, chest tightness, and shortness of breath.\n- Asthma can be triggered by a variety of factors, including allergens, cold air, and tobacco smoke.\n- Treatment for asthma typically involves avoiding triggers, using short-term relief medicines, and taking control medicines to reduce airway inflammation and prevent symptoms.\n\n## Educational Disclaimer\nThis information is intended for educational purposes only and should not be used to diagnose or treat any medical condition. If you or someone you know is experiencing symptoms of asthma, it is essential to consult a qualified healthcare professional for proper diagnosis and treatment. They can provide personalized advice and guidance on managing asthma and preventing asthma attacks. Remember, asthma is a serious condition that requires proper medical attention, so do not hesitate to seek help if you are experiencing symptoms.",
-      "quality_score": 1.0,
-      "quality_checks": {
-        "has_answer": true,
-        "has_direct_answer": true,
-        "has_explanation": true,
-        "has_disclaimer": true,
-        "grounded_in_context": true
-      },
-      "latency_seconds": 14.95,
-      "status": "success"
+      "approaches": {
+        "baseline": {
+          "approach": "baseline",
+          "answer": "## Direct Answer\nAsthma is a chronic respiratory condition that affects the airways in the lungs, causing recurring episodes of wheezing, coughing, chest tightness, and shortness of breath.\n\n## Explanation\nAsthma occurs when the airways in the lungs become inflamed and constricted, making it difficult for air to flow in and out of the lungs. This inflammation can be triggered by a variety of factors, including allergens, respiratory infections, exercise, and air pollution. When an asthma attack occurs, the airways become even more constricted, leading to the symptoms of asthma.\n\n## Important Points\nKey points to understand about asthma include:\n- It is a chronic condition that requires ongoing management.\n- Symptoms can vary in severity and frequency.\n- Triggers can be identified and avoided to help manage the condition.\n- Treatment typically involves a combination of medication and lifestyle changes.\n\n## Educational Disclaimer\nThis information is intended for educational purposes only and should not be used for self-diagnosis or treatment. If you suspect you have asthma or are experiencing symptoms, consult a healthcare professional for a proper diagnosis and treatment plan. They can provide personalized advice and help you develop a management plan tailored to your specific needs.",
+          "quality_score": 0.8,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": false
+          },
+          "latency_seconds": 0.82,
+          "status": "success"
+        },
+        "rag": {
+          "approach": "rag",
+          "answer": "## Direct Answer\nAsthma is a chronic lung disease that affects the airways, causing inflammation and narrowing, which can lead to symptoms such as wheezing, coughing, and chest tightness.\n\n## Explanation\nAsthma is a condition that affects the tubes that carry air in and out of the lungs, called airways. When someone has asthma, their airways can become inflamed and narrowed, making it harder to breathe. This can cause symptoms such as wheezing, coughing, and chest tightness. Asthma can be triggered by various things, including allergens, cold air, and exercise.\n\n## Important Points\n* Asthma is a chronic lung disease that affects people of all ages.\n* Symptoms of asthma include:\n  * Wheezing\n  * Coughing\n  * Chest tightness\n  * Shortness of breath\n* Asthma can be triggered by various things, including:\n  * Allergens (such as dust mites, mold, and pet dander)\n  * Cold air\n  * Exercise\n  * Infections (such as colds and flu)\n\n## Educational Disclaimer\nThis information is intended for educational purposes only and should not be used to diagnose or treat any medical condition. If you suspect you or someone else has asthma, please consult a qualified healthcare professional for proper evaluation and treatment. They can provide personalized advice and care to help manage symptoms and prevent complications.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 13.4,
+          "status": "success"
+        },
+        "improved_rag": {
+          "approach": "improved_rag",
+          "answer": "## Direct Answer\nAsthma is a chronic (long-term) lung disease that affects the airways, causing them to become inflamed and narrowed, leading to symptoms such as wheezing, coughing, and tightness in the chest.\n\n## Explanation\nAccording to the provided sources, specifically Source 1, asthma is a chronic lung disease characterized by inflammation and narrowing of the airways. This can cause a range of symptoms, from mild to severe, including wheezing, coughing, and shortness of breath. The exact cause of asthma is unknown, but genetics and environmental factors are believed to play a role.\n\n## Important Points\n- Asthma is a chronic lung disease that affects the airways.\n- Symptoms of asthma include wheezing, coughing, chest tightness, and shortness of breath.\n- The exact cause of asthma is unknown, but genetics and environmental factors are likely contributors.\n- Asthma can be triggered by various factors, including allergens, cold air, certain medicines, and infections.\n- Diagnosis of asthma involves a physical exam, medical history, and lung function tests.\n- Treatment plans for asthma often include strategies to avoid triggers, short-term relief medicines, and control medicines to reduce airway inflammation.\n\n## Educational Disclaimer\nThis information is for educational purposes only and does not replace advice from a qualified healthcare professional. Asthma is a complex condition that requires personalized diagnosis and treatment. If you suspect you or someone else has asthma, it is crucial to consult a healthcare provider for accurate diagnosis and appropriate management.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 14.46,
+          "status": "success"
+        }
+      }
     },
     {
       "query": "How can I prevent heart disease?",
       "user_level": "beginner",
       "retrieved_documents": 5,
-      "answer": "## Direct Answer\nYou can prevent heart disease by making healthy lifestyle changes, such as controlling your blood pressure, keeping your cholesterol and triglyceride levels under control, staying at a healthy weight, eating a healthy diet, getting regular physical activity, limiting alcohol, not smoking, managing stress, and getting enough sleep.\n\n## Explanation\nHeart disease is a major cause of death and disability, but there are steps you can take to lower your risk. Some risk factors, such as age, sex, and family history, cannot be changed. However, you can make lifestyle changes to reduce your risk. For example, eating a healthy diet, getting regular physical activity, and not smoking can all help to lower your risk of heart disease. Additionally, managing stress, getting enough sleep, and controlling your weight can also help to reduce your risk.\n\n## Important Points\n- Controlling your blood pressure and cholesterol levels is important for preventing heart disease.\n- Eating a healthy diet, such as the DASH diet, can help to lower your blood pressure and cholesterol.\n- Getting regular physical activity, such as walking or exercise, can help to strengthen your heart and improve your circulation.\n- Not smoking and limiting alcohol can also help to reduce your risk of heart disease.\n- Managing stress, getting enough sleep, and controlling your weight are also important for preventing heart disease.\n\n## Educational Disclaimer\nThis information is for educational purposes only and is not intended to replace the advice of a qualified healthcare professional. If you have concerns about your heart health, it is important to speak with your healthcare provider. They can help you to assess your risk factors and develop a plan to reduce your risk of heart disease. Remember, it is always best to consult with a healthcare professional for personalized advice and treatment.",
-      "quality_score": 1.0,
-      "quality_checks": {
-        "has_answer": true,
-        "has_direct_answer": true,
-        "has_explanation": true,
-        "has_disclaimer": true,
-        "grounded_in_context": true
-      },
-      "latency_seconds": 12.0,
-      "status": "success"
+      "approaches": {
+        "baseline": {
+          "approach": "baseline",
+          "answer": "## Direct Answer\nTo prevent heart disease, you can start by making healthy lifestyle choices, such as eating a balanced diet, exercising regularly, maintaining a healthy weight, and not smoking.\n\n## Explanation\nHeart disease is a condition where the heart becomes damaged due to various factors, including high blood pressure, high cholesterol, and smoking. By adopting healthy habits, you can reduce your risk of developing heart disease. A balanced diet that is low in saturated fats, sodium, and added sugars can help keep your heart healthy. Regular exercise, such as walking or jogging, can also help lower your blood pressure and improve your overall cardiovascular health. Additionally, managing stress and getting enough sleep can also contribute to a healthy heart.\n\n## Important Points\nSome key factors to focus on for heart disease prevention include:\n- Eating a diet rich in fruits, vegetables, and whole grains\n- Engaging in at least 150 minutes of moderate-intensity exercise per week\n- Maintaining a healthy weight through a combination of diet and exercise\n- Not smoking and avoiding secondhand smoke\n- Limiting alcohol consumption\n- Managing stress through techniques like meditation or yoga\n\n## Educational Disclaimer\nThis information is for educational purposes only and should not be used as a substitute for professional medical advice. If you have concerns about your heart health, it's essential to consult with a healthcare professional who can assess your individual risk factors and provide personalized guidance. They can help you develop a plan to reduce your risk of heart disease and improve your overall health.",
+          "quality_score": 0.8,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": false
+          },
+          "latency_seconds": 1.08,
+          "status": "success"
+        },
+        "rag": {
+          "approach": "rag",
+          "answer": "## Direct Answer\nYou can prevent heart disease by making healthy lifestyle changes, such as eating a heart-healthy diet, getting regular exercise, and managing stress.\n\n## Explanation\nHeart disease is a serious condition that can be prevented by taking care of your overall health. This includes controlling your blood pressure, cholesterol, and weight. You can do this by eating a healthy diet, exercising regularly, and not smoking. It's also important to get regular check-ups with your doctor to monitor your health.\n\n## Important Points\n* Eat a heart-healthy diet that includes lots of fruits, vegetables, and whole grains\n* Get regular exercise, such as walking or other physical activities\n* Manage stress through relaxation techniques, such as deep breathing or meditation\n* Don't smoke, and avoid secondhand smoke\n* Get regular check-ups with your doctor to monitor your blood pressure, cholesterol, and weight\n* Control your blood sugar levels if you have diabetes\n\n## Educational Disclaimer\nRemember, this information is for educational purposes only and is not a substitute for professional medical advice. If you have concerns about your heart health, talk to your doctor or a qualified healthcare professional. They can provide personalized advice and help you develop a plan to reduce your risk of heart disease. Always consult a healthcare professional before making any significant changes to your lifestyle or medication regimen.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 12.32,
+          "status": "success"
+        },
+        "improved_rag": {
+          "approach": "improved_rag",
+          "answer": "## Direct Answer\n\nTo prevent heart disease, you can take steps to improve your health by understanding your risk factors, making lifestyle changes, and controlling conditions that may increase your risk. This includes controlling your blood pressure, keeping your cholesterol and triglyceride levels under control, staying at a healthy weight, eating a heart-healthy diet, getting regular physical activity, quitting smoking, and managing stress.\n\n## Explanation\n\nAccording to the retrieved sources, heart disease is a leading cause of death and disability in the United States. However, by understanding the risk factors and making lifestyle changes, individuals can lower their risk of heart disease. The sources emphasize the importance of controlling blood pressure, cholesterol, and triglyceride levels, as well as maintaining a healthy weight. Additionally, eating a heart-healthy diet, getting regular physical activity, quitting smoking, and managing stress are all crucial steps in preventing heart disease.\n\n## Important Points\n\n* Controlling blood pressure through regular check-ups and lifestyle changes\n* Keeping cholesterol and triglyceride levels under control through diet and medication (if needed)\n* Staying at a healthy weight through a combination of diet and exercise\n* Eating a heart-healthy diet that includes fruits, vegetables, whole grains, and lean protein sources\n* Getting regular physical activity, such as walking or other aerobic exercises\n* Quitting smoking and avoiding secondhand smoke\n* Managing stress through techniques like meditation or deep breathing\n* Limiting salt and alcohol consumption\n\n## Educational Disclaimer\n\nThis information is for educational purposes only and does not replace advice from a qualified healthcare professional. It is essential to consult with a healthcare provider to determine the best course of action for preventing heart disease, as individual circumstances and risk factors may vary.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 12.71,
+          "status": "success"
+        }
+      }
     },
     {
       "query": "What causes anemia?",
       "user_level": "beginner",
       "retrieved_documents": 5,
-      "answer": "## Direct Answer\nAnemia is most commonly caused by not having enough iron, which is needed to make hemoglobin, a protein that carries oxygen to the body.\n\n## Explanation\nThink of hemoglobin like a delivery truck that brings oxygen to all parts of your body. If you don't have enough of these trucks (because you don't have enough iron to make them), your body's cells won't get the oxygen they need. This can make you feel tired, weak, and short of breath. Anemia can also be caused by other factors such as blood loss, not making enough red blood cells, or having too many red blood cells destroyed.\n\n## Important Points\n- Lack of iron is the most common cause of anemia.\n- Other causes include blood loss, lack of red blood cell production, and high rates of red blood cell destruction.\n- Certain conditions like heavy periods, pregnancy, ulcers, and inherited disorders can lead to anemia.\n- A diet lacking iron, folic acid, or vitamin B12 can also cause anemia.\n\n## Educational Disclaimer\nThe information provided is for educational purposes only and should not be used for diagnosing or treating medical conditions. If you suspect you have anemia or any other health issue, please consult a qualified healthcare professional for proper evaluation, diagnosis, and treatment. Remember, this information is not a substitute for professional medical advice.",
-      "quality_score": 1.0,
-      "quality_checks": {
-        "has_answer": true,
-        "has_direct_answer": true,
-        "has_explanation": true,
-        "has_disclaimer": true,
-        "grounded_in_context": true
-      },
-      "latency_seconds": 9.84,
-      "status": "success"
+      "approaches": {
+        "baseline": {
+          "approach": "baseline",
+          "answer": "## Direct Answer\nAnemia is caused by a lack of enough healthy red blood cells to carry adequate oxygen to the body's tissues.\n\n## Explanation\nAnemia occurs when the body does not have enough red blood cells or the red blood cells do not have enough hemoglobin, a protein that carries oxygen to different parts of the body. This can happen due to various reasons such as not having enough iron, vitamin B12, or folate, which are essential for producing red blood cells. Other causes include blood loss, destruction of red blood cells, or problems with bone marrow where red blood cells are made.\n\n## Important Points\nSome common causes of anemia include:\n- Iron deficiency\n- Vitamin deficiency (such as vitamin B12 or folate)\n- Blood loss (due to injury, surgery, or menstrual bleeding)\n- Red blood cell destruction (due to diseases like sickle cell anemia)\n- Bone marrow problems (such as leukemia or lymphoma)\n- Chronic diseases (like kidney disease or rheumatoid arthritis)\n\n## Educational Disclaimer\nThis information is for educational purposes only and should not be used for self-diagnosis or as a substitute for consulting a healthcare professional. If you suspect you have anemia, it's essential to consult a doctor for proper diagnosis and treatment. A healthcare professional can evaluate your symptoms, perform necessary tests, and provide personalized advice and care.",
+          "quality_score": 0.8,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": false
+          },
+          "latency_seconds": 1.11,
+          "status": "success"
+        },
+        "rag": {
+          "approach": "rag",
+          "answer": "## Direct Answer\nAnemia is caused by not having enough iron, lack of red blood cell production, or high rates of red blood cell destruction.\n\n## Explanation\nAnemia is a condition where the body does not have enough red blood cells or the red blood cells do not have enough hemoglobin. Hemoglobin is a protein that carries oxygen to different parts of the body. Without enough hemoglobin, the body's organs and tissues do not get the oxygen they need. This can make you feel tired, weak, and short of breath.\n\n## Important Points\n* Not having enough iron is the most common cause of anemia.\n* Other causes of anemia include:\n  * Blood loss\n  * Lack of red blood cell production\n  * High rates of red blood cell destruction\n  * Certain medical conditions, such as ulcers, colon polyps, or colon cancer\n  * A diet that does not have enough iron, folic acid, or vitamin B12\n  * Inherited disorders, such as sickle cell anemia or thalassemia\n\n## Educational Disclaimer\nThis information is for educational purposes only and should not be used to diagnose or treat any medical condition. If you suspect you have anemia or any other medical condition, please consult a qualified healthcare professional for proper diagnosis and treatment. They can provide personalized advice and care based on your specific needs and health status.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 9.34,
+          "status": "success"
+        },
+        "improved_rag": {
+          "approach": "improved_rag",
+          "answer": "## Direct Answer\n\nAnemia is caused by not having enough iron, lack of red blood cell production, and high rates of red blood cell destruction. Conditions that may lead to anemia include heavy periods, pregnancy, ulcers, colon polyps or colon cancer, inherited disorders, a diet that does not have enough iron, folic acid, or vitamin B12, and blood disorders such as sickle cell anemia and thalassemia.\n\n## Explanation\n\nAccording to the retrieved sources, anemia occurs when the body does not have enough red blood cells or the red blood cells do not have enough hemoglobin, a protein that carries oxygen to different parts of the body. The most common cause of anemia is not having enough iron, which is necessary for the production of hemoglobin. Other causes of anemia include blood loss, lack of red blood cell production, and high rates of red blood cell destruction. Various conditions, such as heavy periods, pregnancy, ulcers, and inherited disorders, can lead to anemia. Additionally, a diet that lacks essential nutrients like iron, folic acid, and vitamin B12 can also cause anemia.\n\n## Important Points\n\n* Anemia is caused by not having enough iron, lack of red blood cell production, and high rates of red blood cell destruction.\n* Conditions that may lead to anemia include heavy periods, pregnancy, ulcers, colon polyps or colon cancer, inherited disorders, and blood disorders.\n* A diet that does not have enough iron, folic acid, or vitamin B12 can cause anemia.\n* Inherited disorders, such as thalassemia and G6PD deficiency, can also cause anemia.\n* Anemia can be diagnosed with a physical exam and blood tests, and treatment depends on the kind of anemia.\n\n## Educational Disclaimer\n\nThis information is for educational purposes only and does not replace advice from a qualified healthcare professional. If you suspect you have anemia or any other medical condition, it is essential to consult a healthcare professional for proper diagnosis and treatment.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 9.44,
+          "status": "success"
+        }
+      }
     },
     {
       "query": "What are the symptoms of depression?",
       "user_level": "beginner",
       "retrieved_documents": 5,
-      "answer": "## Direct Answer\nThe symptoms of depression can include feeling sad or \"empty\", losing interest in favorite activities, overeating or not wanting to eat, sleeping too much or not enough, feeling tired, hopeless, irritable, anxious, or guilty, and having thoughts of death or suicide.\n\n## Explanation\nDepression is a serious mood disorder that can affect how you think, feel, and go about your daily life. It's not just feeling sad for a few days, but a persistent feeling of sadness, hopelessness, and loss of interest in activities that you once enjoyed. The symptoms of depression can vary from person to person and can be different in different age groups, such as children, teens, and older adults. For example, children may appear more irritable than sad, while teens may act out or have excessive sleepiness.\n\n## Important Points\nSome key points to remember about the symptoms of depression include:\n* Feeling sad or \"empty\" for most of the day\n* Losing interest in favorite activities\n* Changes in appetite or sleep\n* Feeling tired, hopeless, or guilty\n* Having thoughts of death or suicide\n* Symptoms can vary depending on age, sex, and medical conditions\n* Depression can affect anyone, regardless of age or background\n\n## Educational Disclaimer\nThis information is intended for educational purposes only and should not be used to diagnose or treat depression. If you or someone you know is experiencing symptoms of depression, it's essential to seek help from a qualified healthcare professional. They can provide a proper diagnosis and recommend appropriate treatment options. Remember, depression is a treatable condition, and seeking help is the first step towards recovery.",
-      "quality_score": 1.0,
-      "quality_checks": {
-        "has_answer": true,
-        "has_direct_answer": true,
-        "has_explanation": true,
-        "has_disclaimer": true,
-        "grounded_in_context": true
-      },
-      "latency_seconds": 15.86,
-      "status": "success"
+      "approaches": {
+        "baseline": {
+          "approach": "baseline",
+          "answer": "## Direct Answer\nThe symptoms of depression can include persistent feelings of sadness, hopelessness, loss of interest in activities, changes in appetite or sleep, fatigue, difficulty concentrating, and thoughts of death or suicide.\n\n## Explanation\nDepression is a complex mental health condition that affects people in different ways. The symptoms can vary from person to person, but common signs include a low mood that lasts for more than two weeks, loss of pleasure in activities that were once enjoyed, and changes in physical health such as weight gain or loss, insomnia, or excessive sleepiness. It's also common for people with depression to have difficulty concentrating, making decisions, or remembering things.\n\n## Important Points\nIt's essential to recognize that depression is not a sign of weakness, and it's not something that someone can simply \"snap out of.\" It's a treatable condition that requires professional help. If you or someone you know is experiencing symptoms of depression, it's crucial to seek help from a qualified healthcare professional. They can provide a proper diagnosis, recommend treatment options, and offer support throughout the recovery process.\n\n## Educational Disclaimer\nThis information is for educational purposes only and should not be used to diagnose or treat any medical condition. If you suspect that you or someone you know may be experiencing depression, please consult a qualified healthcare professional for proper evaluation, diagnosis, and treatment. They can provide personalized guidance and support to help manage symptoms and improve overall well-being.",
+          "quality_score": 0.8,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": false
+          },
+          "latency_seconds": 1.04,
+          "status": "success"
+        },
+        "rag": {
+          "approach": "rag",
+          "answer": "## Direct Answer\nThe symptoms of depression include feeling sad or \"empty\", losing interest in favorite activities, changes in sleep and appetite, feeling tired, hopeless, or irritable, and having thoughts of death or suicide.\n\n## Explanation\nDepression is a serious medical condition that affects a person's emotional state. It's not just feeling sad or blue for a few days, but a persistent feeling of sadness, hopelessness, and loss of interest in activities that you used to enjoy. Depression can affect anyone, regardless of age or gender, and can be triggered by various factors such as genetics, brain chemistry, or stressful life events.\n\n## Important Points\n* Symptoms of depression can include:\n  * Feeling sad or \"empty\"\n  * Losing interest in favorite activities\n  * Changes in sleep and appetite\n  * Feeling tired, hopeless, or irritable\n  * Having thoughts of death or suicide\n  * Physical symptoms such as headaches, cramps, or digestive problems\n* Depression can be diagnosed by a healthcare provider through a medical history, physical exam, and mental health evaluation\n* Treatment for depression may include medication, talk therapy, or a combination of both\n\n## Educational Disclaimer\nRemember, this information is for educational purposes only and is not a substitute for professional medical advice. If you or someone you know is experiencing symptoms of depression, it's essential to consult with a qualified healthcare provider for proper diagnosis and treatment. They can help you develop a personalized treatment plan to manage your symptoms and improve your overall well-being.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 13.75,
+          "status": "success"
+        },
+        "improved_rag": {
+          "approach": "improved_rag",
+          "answer": "## Direct Answer\n\nThe symptoms of depression include feeling sad or \"empty\", losing interest in favorite activities, overeating or not wanting to eat at all, sleeping too much or not enough, feeling very tired, feeling hopeless, irritable, anxious, or guilty, having aches and pains, headaches, cramps, or digestive problems, having thoughts of death or suicide, changing moods or behaviors, and increasing use of alcohol or drugs.\n\n## Explanation\n\nAccording to the retrieved sources, depression is a serious medical illness that affects a person's everyday emotional state. The symptoms of depression can vary, but common symptoms include feelings of sadness, hopelessness, and irritability. Physical symptoms such as changes in appetite, sleep, and energy levels are also common. In addition, people with depression may experience thoughts of death or suicide, and may turn to alcohol or drugs as a way to cope.\n\n## Important Points\n\n* Symptoms of depression can include feelings of sadness, hopelessness, and irritability\n* Physical symptoms such as changes in appetite, sleep, and energy levels are common\n* Depression can cause thoughts of death or suicide\n* Increasing use of alcohol or drugs can be a symptom of depression\n* Depression can be diagnosed through a combination of medical history, physical exam, and mental health evaluation\n* Treatment for depression may include medication, psychotherapy, or a combination of both\n\n## Educational Disclaimer\n\nThis information is for educational purposes only and does not replace advice from a qualified healthcare professional. If you or someone you know is experiencing symptoms of depression, it is essential to seek help from a qualified healthcare provider. They can provide a proper diagnosis and develop a treatment plan that is tailored to the individual's needs.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 13.48,
+          "status": "success"
+        }
+      }
     },
     {
       "query": "What is cholesterol?",
       "user_level": "beginner",
       "retrieved_documents": 5,
-      "answer": "## Direct Answer\nCholesterol is a waxy, fat-like substance found in all the cells of the body.\n\n## Explanation\nCholesterol is necessary for the body to function properly, as it helps make hormones, vitamin D, and substances that aid in food digestion. However, having too much cholesterol in the blood can lead to it sticking to the walls of the arteries, narrowing or blocking them, and increasing the risk of coronary artery disease and other heart diseases.\n\n## Important Points\n- The body produces all the cholesterol it needs, but cholesterol is also found in foods from animal sources, such as egg yolks, meat, and cheese.\n- There are different types of cholesterol, including \"bad\" cholesterol (LDL), which contributes to the buildup of plaque in the arteries, and \"good\" cholesterol (HDL), which helps remove cholesterol from the body.\n- Lifestyle changes, such as a heart-healthy diet, regular physical activity, and not smoking, can help manage cholesterol levels.\n\n## Educational Disclaimer\nThe information provided is for educational purposes only and should not be considered as medical advice. It's essential to consult a healthcare professional for personalized advice on managing cholesterol levels and overall health. If you have concerns about your cholesterol or heart health, please seek immediate medical care. Remember, this information is not a substitute for professional medical diagnosis or treatment. Always consult a qualified healthcare provider for specific guidance on your health.",
-      "quality_score": 1.0,
-      "quality_checks": {
-        "has_answer": true,
-        "has_direct_answer": true,
-        "has_explanation": true,
-        "has_disclaimer": true,
-        "grounded_in_context": true
-      },
-      "latency_seconds": 19.69,
-      "status": "success"
+      "approaches": {
+        "baseline": {
+          "approach": "baseline",
+          "answer": "## Direct Answer\nCholesterol is a type of fat found in the bloodstream that is essential for various bodily functions.\n\n## Explanation\nCholesterol is a waxy, fat-like substance produced by the liver and also obtained from the food we eat. It plays a crucial role in the formation of cell membranes, production of hormones (such as estrogen and testosterone), and vitamin D. However, high levels of cholesterol can lead to the buildup of plaque in the arteries, increasing the risk of heart disease and stroke.\n\n## Important Points\nThere are two main types of cholesterol: low-density lipoprotein (LDL) or \"bad\" cholesterol, and high-density lipoprotein (HDL) or \"good\" cholesterol. LDL cholesterol can accumulate on the walls of the arteries, forming plaques and leading to atherosclerosis. On the other hand, HDL cholesterol helps remove excess cholesterol from the bloodstream, reducing the risk of heart disease. Maintaining a healthy balance between LDL and HDL cholesterol is essential for overall cardiovascular health.\n\n## Educational Disclaimer\nThe information provided is for general educational purposes only and should not be considered as medical advice. If you have concerns about your cholesterol levels or heart health, it is essential to consult a qualified healthcare professional for personalized guidance and diagnosis. They can assess your individual situation, provide a proper diagnosis, and recommend appropriate treatment options.",
+          "quality_score": 0.8,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": false
+          },
+          "latency_seconds": 1.15,
+          "status": "success"
+        },
+        "rag": {
+          "approach": "rag",
+          "answer": "## Direct Answer\nCholesterol is a waxy, fat-like substance found in all the cells of the body.\n\n## Explanation\nCholesterol is necessary for the body to function properly, but having too much of it in the blood can be harmful. It can stick to the walls of the arteries and narrow or block them, putting you at risk for coronary artery disease and other heart diseases. Cholesterol is made by the liver and also comes from the food we eat, especially animal products.\n\n## Important Points\n* Cholesterol is a waxy, fat-like substance found in all cells of the body.\n* The body needs some cholesterol to work properly.\n* Too much cholesterol in the blood can stick to the walls of the arteries and narrow or block them.\n* There are two main types of cholesterol: \"good\" (HDL) and \"bad\" (LDL) cholesterol.\n* HDL cholesterol helps remove cholesterol from the arteries, while LDL cholesterol can build up in the arteries and cause problems.\n\n## Educational Disclaimer\nThis information is intended for educational purposes only and should not be used to diagnose or treat any medical condition. If you have concerns about your cholesterol levels or heart health, please consult a qualified healthcare professional for personalized advice and care. Remember, it's always important to consult with a healthcare professional before making any significant changes to your lifestyle or treatment plan.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 19.7,
+          "status": "success"
+        },
+        "improved_rag": {
+          "approach": "improved_rag",
+          "answer": "## Direct Answer\n\nCholesterol is a waxy, fat-like substance that's found in all the cells in your body. Your body needs some cholesterol to work properly, but if you have too much of it in your blood, it can stick to the walls of your arteries and narrow or even block them.\n\n## Explanation\n\nAccording to the provided sources, cholesterol is a necessary substance in the body, but high levels of it can lead to coronary artery disease and other heart diseases. It is made by the liver and travels through the blood on proteins called lipoproteins. There are two main types of lipoproteins: LDL (low-density lipoprotein), also known as \"bad\" cholesterol, and HDL (high-density lipoprotein), also known as \"good\" cholesterol.\n\n## Important Points\n\n* Cholesterol is a waxy, fat-like substance found in all cells of the body.\n* The body needs some cholesterol to function properly.\n* High levels of cholesterol in the blood can lead to coronary artery disease and other heart diseases.\n* There are two main types of lipoproteins: LDL (bad) cholesterol and HDL (good) cholesterol.\n* LDL cholesterol can build up in the arteries, while HDL cholesterol helps remove cholesterol from the arteries.\n\n## Educational Disclaimer\n\nThis information is for educational purposes only and does not replace advice from a qualified healthcare professional. If you have concerns about your cholesterol levels or heart health, it is essential to consult with a healthcare provider for personalized guidance and treatment.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 19.55,
+          "status": "success"
+        }
+      }
     },
     {
       "query": "What are the symptoms of pneumonia?",
       "user_level": "beginner",
       "retrieved_documents": 5,
-      "answer": "## Direct Answer\nThe symptoms of pneumonia can range from mild to severe and include fever, chills, cough, usually with phlegm, shortness of breath, chest pain when you breathe or cough, nausea and/or vomiting, and diarrhea.\n\n## Explanation\nPneumonia is an infection in one or both of the lungs that causes the air sacs to fill up with fluid or pus. The symptoms can vary depending on the type of germ causing the infection, age, and overall health. For example, newborns and infants may not show any signs of the infection, while older adults may have fewer and milder symptoms. It's essential to recognize the symptoms of pneumonia to seek medical attention if necessary.\n\n## Important Points\n- Pneumonia can be caused by bacterial, viral, or fungal infections.\n- Symptoms can range from mild to severe and may include fever, chills, cough, shortness of breath, and chest pain.\n- Certain groups, such as older adults and people with weakened immune systems, may have fewer and milder symptoms.\n- If you experience symptoms of pneumonia, it's crucial to contact your healthcare provider for proper diagnosis and treatment.\n\n## Educational Disclaimer\nThis information is intended for educational purposes only and should not be used to diagnose or treat any medical condition. If you suspect you have pneumonia or are experiencing symptoms, please consult a qualified healthcare professional for proper evaluation and treatment. They can provide personalized advice and care to ensure the best possible outcome. Remember, it's always better to err on the side of caution when it comes to your health, and seeking medical attention is the first step towards recovery.",
-      "quality_score": 1.0,
-      "quality_checks": {
-        "has_answer": true,
-        "has_direct_answer": true,
-        "has_explanation": true,
-        "has_disclaimer": true,
-        "grounded_in_context": true
-      },
-      "latency_seconds": 16.98,
-      "status": "success"
+      "approaches": {
+        "baseline": {
+          "approach": "baseline",
+          "answer": "## Direct Answer\nThe symptoms of pneumonia can include cough, fever, chills, shortness of breath, chest pain, fatigue, and headache.\n\n## Explanation\nPneumonia is an infection that inflames the air sacs in one or both lungs, which may fill with fluid. This can cause a variety of symptoms, ranging from mild to severe. The cough can be dry or produce mucus, and in some cases, the mucus may be tinged with blood. Fever is a common symptom, and it can be accompanied by chills and sweating. Shortness of breath can occur due to the reduced ability of the lungs to take in oxygen. Chest pain can be sharp or dull and may worsen with deep breathing or coughing. Fatigue and headache are also common due to the body's response to the infection.\n\n## Important Points\nIt's essential to seek medical attention if symptoms persist or worsen over time. Early diagnosis and treatment can significantly improve outcomes. Certain groups, such as the elderly, young children, and people with weakened immune systems, are at higher risk for complications from pneumonia.\n\n## Educational Disclaimer\nThis information is for educational purposes only and should not be used for self-diagnosis or as a substitute for professional medical advice. If you suspect you have pneumonia or are experiencing symptoms, consult a healthcare professional for an accurate diagnosis and appropriate treatment. They can provide personalized advice and care based on your specific condition and medical history.",
+          "quality_score": 0.8,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": false
+          },
+          "latency_seconds": 1.03,
+          "status": "success"
+        },
+        "rag": {
+          "approach": "rag",
+          "answer": "## Direct Answer\nThe symptoms of pneumonia can include cough, high fever, chills, headache, chest pain, shortness of breath, fatigue, nausea, vomiting, diarrhea, and confusion.\n\n## Explanation\nPneumonia is an infection that inflames the air sacs in one or both lungs. The symptoms can vary depending on the type of pneumonia, but common symptoms include respiratory issues and fever. It's essential to seek medical attention if you experience severe symptoms or if you are at risk for complications.\n\n## Important Points\n* Common symptoms of pneumonia:\n  + Cough\n  + High fever\n  + Chills\n  + Headache\n  + Chest pain\n  + Shortness of breath\n  + Fatigue\n  + Nausea and vomiting\n  + Diarrhea\n  + Confusion\n* Pneumonia can be caused by different types of germs, including bacteria, viruses, and fungi.\n* Treatment for pneumonia depends on the type of pneumonia and its severity.\n\n## Educational Disclaimer\nThis information is for educational purposes only and should not be used to diagnose or treat any medical condition. If you suspect you have pneumonia or are experiencing severe symptoms, please seek immediate medical attention from a qualified healthcare professional.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 18.38,
+          "status": "success"
+        },
+        "improved_rag": {
+          "approach": "improved_rag",
+          "answer": "## Direct Answer\nThe symptoms of pneumonia can include cough, high fever, chills, headache, chest pain, shortness of breath, fatigue, nausea, vomiting, diarrhea, and confusion.\n\n## Explanation\nAccording to the provided sources, specifically SOURCE 1 (Pneumonia) and SOURCE 2 (Legionnaires' Disease), pneumonia can cause a range of symptoms. SOURCE 1 mentions that pneumonia can cause symptoms similar to those of a cold or the flu, but can also lead to more severe complications. SOURCE 2 lists specific symptoms of Legionnaires' disease, a type of pneumonia, which include cough, high fever, chills, headache, chest pain, and shortness of breath. SOURCE 3 (Pneumocystis Infections) also lists symptoms of pneumocystis pneumonia, which include fever, cough, trouble breathing, chest pain, and chills.\n\n## Important Points\n* Pneumonia can cause symptoms similar to those of a cold or the flu\n* Symptoms of pneumonia can include cough, high fever, chills, headache, chest pain, and shortness of breath\n* Pneumonia can lead to more severe complications, such as respiratory failure, kidney failure, and sepsis\n* Different types of pneumonia, such as Legionnaires' disease and pneumocystis pneumonia, can have similar symptoms\n* It is essential to seek medical attention if symptoms persist or worsen over time\n\n## Educational Disclaimer\nThis information is for educational purposes only and does not replace advice from a qualified healthcare professional. If you suspect you have pneumonia or are experiencing symptoms, it is essential to consult a healthcare professional for proper diagnosis and treatment.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 17.59,
+          "status": "success"
+        }
+      }
     },
     {
       "query": "What is a stroke?",
       "user_level": "beginner",
       "retrieved_documents": 5,
-      "answer": "## Direct Answer\nA stroke happens when there is a loss of blood flow to part of the brain, causing brain cells to die within a few minutes due to lack of oxygen and nutrients.\n\n## Explanation\nImagine your brain as a city that needs a constant supply of water and food to function properly. In the case of a stroke, it's like the water and food supply lines to a part of the city are blocked or broken, causing damage to that area. This can lead to lasting brain damage, long-term disability, or even death. There are two main types of strokes: ischemic, which is caused by a blood clot blocking a blood vessel in the brain, and hemorrhagic, which occurs when a blood vessel in the brain bursts, causing bleeding.\n\n## Important Points\n- A stroke can cause sudden symptoms such as numbness or weakness in the face, arm, or leg, confusion, trouble speaking or understanding speech, trouble seeing, difficulty walking, dizziness, loss of balance, or a severe headache.\n- The F.A.S.T. test can help identify stroke symptoms: Face drooping, Arm weakness, Speech difficulties, and Time to call 911.\n- Immediate treatment is crucial to save a life and improve chances of recovery.\n\n## Educational Disclaimer\nThis information is intended for educational purposes only and should not be used for diagnosing or treating medical conditions. If you or someone else is experiencing symptoms of a stroke, call 911 immediately. For any concerns about your health, consult a qualified healthcare professional.",
-      "quality_score": 1.0,
-      "quality_checks": {
-        "has_answer": true,
-        "has_direct_answer": true,
-        "has_explanation": true,
-        "has_disclaimer": true,
-        "grounded_in_context": true
-      },
-      "latency_seconds": 17.19,
-      "status": "success"
+      "approaches": {
+        "baseline": {
+          "approach": "baseline",
+          "answer": "## Direct Answer\nA stroke is a medical condition that occurs when the blood supply to the brain is interrupted or reduced, causing damage to the brain tissue.\n\n## Explanation\nThis interruption or reduction in blood supply can be due to a blockage or rupture of the blood vessels in the brain. As a result, the brain cells do not receive the oxygen and nutrients they need, leading to cell death and damage. Strokes can cause a range of symptoms, including weakness or numbness in the face, arm, or leg, difficulty with speech or vision, and dizziness or loss of balance.\n\n## Important Points\nThere are three main types of strokes: ischemic (caused by a blockage), hemorrhagic (caused by a rupture), and transient ischemic attack (a temporary blockage). It is essential to recognize the signs and symptoms of a stroke and seek medical attention immediately if they occur. Prompt treatment can help minimize damage and improve outcomes.\n\n## Educational Disclaimer\nThis information is for educational purposes only and should not be used for self-diagnosis or treatment. If you or someone you know is experiencing symptoms of a stroke, call emergency services or seek medical attention immediately. A qualified healthcare professional can provide a proper diagnosis and recommend appropriate treatment.",
+          "quality_score": 0.8,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": false
+          },
+          "latency_seconds": 0.87,
+          "status": "success"
+        },
+        "rag": {
+          "approach": "rag",
+          "answer": "## Direct Answer\nA stroke is a condition that occurs when there is a loss of blood flow to part of the brain, causing brain cells to die within a few minutes.\n\n## Explanation\nImagine your brain is like a city that needs a constant supply of water and food to function properly. Blood vessels are like the roads that bring water and food to the city. When a road (blood vessel) is blocked or damaged, the city (brain) doesn't get what it needs, and parts of it can die. This is what happens during a stroke.\n\n## Important Points\n* A stroke can cause lasting brain damage, long-term disability, or even death.\n* There are two main types of strokes: ischemic (caused by a blood clot) and hemorrhagic (caused by a broken blood vessel).\n* Symptoms of a stroke can include sudden numbness or weakness, confusion, trouble speaking or understanding speech, and sudden severe headache.\n* If you think someone is having a stroke, call 911 right away and remember the F.A.S.T. test: Face drooping, Arm weakness, Speech difficulties, and Time to call 911.\n\n## Educational Disclaimer\nThis information is intended for educational purposes only and should not be used to diagnose or treat any medical condition. If you or someone you know is experiencing symptoms of a stroke, please seek immediate medical attention. A qualified healthcare professional can provide personalized advice and treatment. Remember, every minute counts during a stroke, so don't hesitate to call for help.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 14.4,
+          "status": "success"
+        },
+        "improved_rag": {
+          "approach": "improved_rag",
+          "answer": "## Direct Answer\nA stroke happens when there is a loss of blood flow to part of the brain, causing brain cells to die within a few minutes due to lack of oxygen and nutrients.\n\n## Explanation\nAccording to the provided sources, a stroke occurs when the blood supply to the brain is interrupted, either due to a blockage (ischemic stroke) or a rupture (hemorrhagic stroke) of blood vessels. This interruption leads to the death of brain cells, resulting in potential lasting brain damage, long-term disability, or even death. The sources emphasize the importance of immediate treatment and highlight the various types of strokes, including ischemic and hemorrhagic strokes, as well as transient ischemic attacks (TIAs), which are often warning signs for future strokes.\n\n## Important Points\n- A stroke is caused by a loss of blood flow to part of the brain.\n- There are two main types of strokes: ischemic (caused by a blood clot) and hemorrhagic (caused by a blood vessel rupture).\n- Symptoms of a stroke include sudden numbness or weakness, confusion, trouble speaking or understanding speech, sudden trouble seeing, walking, dizziness, loss of balance, or severe headache.\n- The F.A.S.T. test can help identify stroke symptoms: Face drooping, Arm weakness, Speech difficulties, and Time to call 911.\n- Immediate treatment is crucial for saving lives and improving recovery chances.\n\n## Educational Disclaimer\nThis information is for educational purposes only and does not replace advice from a qualified healthcare professional. It is based on the provided sources and should not be used for self-diagnosis or treatment. If you suspect someone is having a stroke, call emergency services immediately.",
+          "quality_score": 1.0,
+          "quality_checks": {
+            "has_answer": true,
+            "has_direct_answer": true,
+            "has_explanation": true,
+            "has_disclaimer": true,
+            "grounded_in_context": true
+          },
+          "latency_seconds": 14.8,
+          "status": "success"
+        }
+      }
     }
   ]
 }

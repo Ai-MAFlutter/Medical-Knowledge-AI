@@ -1,0 +1,59 @@
+{
+    "summary": {
+        "total_tests": 6,
+        "successful_tests": 6,
+        "average_latency_seconds": 1.7056,
+        "average_keyword_score": 1.0,
+        "average_source_score": 1.0
+    },
+    "results": [
+        {
+            "question": "What is an A1C test?",
+            "latency_seconds": 2.8432,
+            "documents_retrieved": 5,
+            "keyword_score": 1.0,
+            "source_score": 1.0,
+            "success": true
+        },
+        {
+            "question": "What are the symptoms of diabetes?",
+            "latency_seconds": 1.5392,
+            "documents_retrieved": 5,
+            "keyword_score": 1.0,
+            "source_score": 1.0,
+            "success": true
+        },
+        {
+            "question": "What is asthma?",
+            "latency_seconds": 1.3507,
+            "documents_retrieved": 5,
+            "keyword_score": 1.0,
+            "source_score": 1.0,
+            "success": true
+        },
+        {
+            "question": "What causes high blood pressure?",
+            "latency_seconds": 1.3241,
+            "documents_retrieved": 5,
+            "keyword_score": 1.0,
+            "source_score": 1.0,
+            "success": true
+        },
+        {
+            "question": "What are the symptoms of anemia?",
+            "latency_seconds": 1.6944,
+            "documents_retrieved": 5,
+            "keyword_score": 1.0,
+            "source_score": 1.0,
+            "success": true
+        },
+        {
+            "question": "What are the symptoms of the flu?",
+            "latency_seconds": 1.4818,
+            "documents_retrieved": 5,
+            "keyword_score": 1.0,
+            "source_score": 1.0,
+            "success": true
+        }
+    ]
+}

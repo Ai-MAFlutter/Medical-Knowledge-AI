@@ -1,316 +1,608 @@
+import os
 import json
 from pathlib import Path
 
-import faiss
 import numpy as np
-
 from sentence_transformers import SentenceTransformer
 
 
-# =====================================================
+# ============================================================
 # PATHS
-# =====================================================
+# ============================================================
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-CHUNKS_PATH = (
+DATA_PATH = (
     PROJECT_ROOT
     / "data"
     / "processed"
     / "medlineplus_chunks.json"
 )
 
+CACHE_DIR = (
+    PROJECT_ROOT
+    / "data"
+    / "processed"
+    / "vector_cache"
+)
 
-# =====================================================
-# EMBEDDING MODEL
-# =====================================================
-
-MODEL_NAME = "all-MiniLM-L6-v2"
+EMBEDDINGS_PATH = CACHE_DIR / "embeddings.npy"
+METADATA_PATH = CACHE_DIR / "metadata.json"
 
 
-# =====================================================
+# ============================================================
+# LOCAL EMBEDDING MODEL
+# ============================================================
+
+MODEL_PATH = os.getenv(
+    "EMBEDDING_MODEL_PATH",
+    "all-MiniLM-L6-v2"
+)
+
+
+# ============================================================
 # VECTOR SEARCH ENGINE
-# =====================================================
+# ============================================================
 
-class VectorSearch:
+class VectorSearchEngine:
 
-    def __init__(self, chunks):
+    def __init__(
+        self,
+        data_path: str = None,
+        model_name: str = "all-MiniLM-L6-v2"
+    ):
 
-        self.chunks = chunks
+        self.data_path = (
+            Path(data_path)
+            if data_path
+            else DATA_PATH
+        )
+
+        self.model_name = model_name
+
+        self.documents = []
+
+        self.embeddings = None
+
+        self.model = None
+
+        # ----------------------------------------------------
+        # INITIALIZE
+        # ----------------------------------------------------
+
+        self._load_documents()
+
+        self._load_model()
+
+        self._load_or_create_embeddings()
+
+    # ========================================================
+    # LOAD DOCUMENTS
+    # ========================================================
+
+    def _load_documents(self):
 
         print(
-            f"Loading embedding model: {MODEL_NAME}"
+            f"Loading documents from: "
+            f"{self.data_path}"
         )
 
-        self.model = SentenceTransformer(
-            MODEL_NAME
+        if not self.data_path.exists():
+
+            raise FileNotFoundError(
+                "Dataset not found:\n"
+                f"{self.data_path}"
+            )
+
+        with open(
+            self.data_path,
+            "r",
+            encoding="utf-8"
+        ) as file:
+
+            self.documents = json.load(file)
+
+        print(
+            f"Loaded "
+            f"{len(self.documents)} "
+            f"documents."
+        )
+
+    # ========================================================
+    # LOAD EMBEDDING MODEL
+    # ========================================================
+
+    def _load_model(self):
+
+        print(
+            "\nLoading embedding model:"
         )
 
         print(
-            "Creating document embeddings..."
+            MODEL_PATH
         )
 
-        self.documents = [
+        # ----------------------------------------------------
+        # LOCAL MODEL PATH
+        # ----------------------------------------------------
 
-            " ".join(
+        model_path = Path(MODEL_PATH)
 
-                [
+        if model_path.exists():
 
-                    chunk["title"],
+            self.model = SentenceTransformer(
+                str(model_path),
+                device="cpu"
+            )
 
-                    chunk["content"],
+        # ----------------------------------------------------
+        # HUGGINGFACE MODEL NAME
+        # ----------------------------------------------------
 
-                    chunk["category"],
+        else:
 
-                ]
+            self.model = SentenceTransformer(
+                MODEL_PATH,
+                device="cpu"
+            )
+
+        print(
+            "\nEmbedding model loaded successfully."
+        )
+
+    # ========================================================
+    # BUILD DOCUMENT TEXT
+    # ========================================================
+
+    def _get_document_text(
+        self,
+        document
+    ):
+
+        title = document.get(
+            "title",
+            ""
+        )
+
+        content = document.get(
+            "content",
+            ""
+        )
+
+        category = document.get(
+            "category",
+            ""
+        )
+
+        language = document.get(
+            "language",
+            ""
+        )
+
+        return (
+
+            f"Title: {title}\n"
+
+            f"Category: {category}\n"
+
+            f"Language: {language}\n"
+
+            f"Content: {content}"
+
+        )
+
+    # ========================================================
+    # LOAD OR CREATE EMBEDDINGS
+    # ========================================================
+
+    def _load_or_create_embeddings(self):
+
+        CACHE_DIR.mkdir(
+            parents=True,
+            exist_ok=True
+        )
+
+        # ----------------------------------------------------
+        # LOAD CACHE
+        # ----------------------------------------------------
+
+        if (
+
+            EMBEDDINGS_PATH.exists()
+
+            and
+
+            METADATA_PATH.exists()
+
+        ):
+
+            print(
+                "\nLoading cached embeddings..."
+            )
+
+            self.embeddings = np.load(
+                EMBEDDINGS_PATH
+            )
+
+            with open(
+                METADATA_PATH,
+                "r",
+                encoding="utf-8"
+            ) as file:
+
+                metadata = json.load(file)
+
+            # ------------------------------------------------
+            # VALIDATE CACHE
+            # ------------------------------------------------
+
+            cache_is_valid = (
+
+                metadata.get(
+                    "document_count"
+                )
+
+                == len(
+                    self.documents
+                )
+
+                and
+
+                metadata.get(
+                    "embedding_dimension"
+                )
+
+                == self.embeddings.shape[1]
+
+                and
+
+                metadata.get(
+                    "model_path"
+                )
+
+                == str(
+                    MODEL_PATH
+                )
 
             )
 
-            for chunk in chunks
+            if cache_is_valid:
+
+                print(
+                    "Loaded cached embeddings: "
+                    f"{self.embeddings.shape}"
+                )
+
+                return
+
+            print(
+                "Cache does not match dataset "
+                "or model."
+            )
+
+            print(
+                "Rebuilding embeddings..."
+            )
+
+        # ----------------------------------------------------
+        # CREATE EMBEDDINGS
+        # ----------------------------------------------------
+
+        print(
+            "\nCreating document embeddings..."
+        )
+
+        texts = [
+
+            self._get_document_text(
+                document
+            )
+
+            for document in self.documents
 
         ]
 
-        self.embeddings = (
+        self.embeddings = self.model.encode(
 
-            self.model.encode(
+            texts,
 
-                self.documents,
+            batch_size=32,
 
-                show_progress_bar=True,
+            show_progress_bar=True,
 
-                convert_to_numpy=True,
+            convert_to_numpy=True,
 
-                normalize_embeddings=True,
+            normalize_embeddings=True
+
+        )
+
+        # ----------------------------------------------------
+        # SAVE EMBEDDINGS
+        # ----------------------------------------------------
+
+        np.save(
+            EMBEDDINGS_PATH,
+            self.embeddings
+        )
+
+        metadata = {
+
+            "model_name":
+            self.model_name,
+
+            "model_path":
+            str(
+                MODEL_PATH
+            ),
+
+            "document_count":
+            len(
+                self.documents
+            ),
+
+            "embedding_dimension":
+            int(
+                self.embeddings.shape[1]
+            )
+
+        }
+
+        with open(
+
+            METADATA_PATH,
+
+            "w",
+
+            encoding="utf-8"
+
+        ) as file:
+
+            json.dump(
+
+                metadata,
+
+                file,
+
+                indent=2
 
             )
 
-        )
-
-        # -----------------------------------------
-        # FAISS Index
-        # -----------------------------------------
-
-        dimension = self.embeddings.shape[1]
-
-        self.index = faiss.IndexFlatIP(
-            dimension
-        )
-
-        self.index.add(
-            self.embeddings.astype(
-                "float32"
-            )
-        )
-
         print(
-            f"Indexed {len(self.chunks)} chunks."
+            "\nEmbeddings cached successfully."
         )
 
-        print(
-            f"Embedding dimension: {dimension}"
-        )
-
-
-    # =================================================
+    # ========================================================
     # SEARCH
-    # =================================================
+    # ========================================================
 
     def search(
 
         self,
 
-        query,
+        query: str,
 
-        top_k=5,
+        top_k: int = 10,
 
-        language=None,
+        language: str = None,
 
-        category=None,
+        category: str = None,
+
+        track: str = None,
+
+        **kwargs
 
     ):
 
-        query_embedding = (
+        """
+        Semantic vector search.
 
-            self.model.encode(
+        Supported optional filters:
 
-                [
+        - language
+        - category
+        - track
+        """
 
-                    query
+        if not query:
 
-                ],
+            return []
 
-                convert_to_numpy=True,
+        # ----------------------------------------------------
+        # EMBED QUERY
+        # ----------------------------------------------------
 
-                normalize_embeddings=True,
+        query_embedding = self.model.encode(
 
-            )
+            query,
 
-        )
+            convert_to_numpy=True,
 
-        scores, indices = (
-
-            self.index.search(
-
-                query_embedding.astype(
-
-                    "float32"
-
-                ),
-
-                top_k * 5,
-
-            )
+            normalize_embeddings=True
 
         )
 
-        results = []
+        # ----------------------------------------------------
+        # COSINE SIMILARITY
+        # ----------------------------------------------------
 
-        for score, chunk_index in zip(
+        scores = np.dot(
 
-            scores[0],
+            self.embeddings,
 
-            indices[0],
+            query_embedding
+
+        )
+
+        # ----------------------------------------------------
+        # FILTER DOCUMENTS
+        # ----------------------------------------------------
+
+        valid_indices = []
+
+        for index, document in enumerate(
+
+            self.documents
 
         ):
 
-            if chunk_index == -1:
+            if (
+
+                language is not None
+
+                and
+
+                document.get(
+                    "language"
+                )
+
+                != language
+
+            ):
 
                 continue
 
-            chunk = self.chunks[
-                chunk_index
-            ]
+            if (
 
-            # -----------------------------------------
-            # Language Filter
-            # -----------------------------------------
+                category is not None
 
-            if language is not None:
+                and
 
-                if (
+                document.get(
+                    "category"
+                )
 
-                    chunk["language"]
+                != category
 
-                    != language
+            ):
 
-                ):
+                continue
 
-                    continue
+            if (
 
-            # -----------------------------------------
-            # Category Filter
-            # -----------------------------------------
+                track is not None
 
-            if category is not None:
+                and
 
-                if (
+                document.get(
+                    "track"
+                )
 
-                    chunk["category"].lower()
+                != track
 
-                    != category.lower()
+            ):
 
-                ):
+                continue
 
-                    continue
+            valid_indices.append(
+                index
+            )
 
-            result = chunk.copy()
+        # ----------------------------------------------------
+        # FALLBACK
+        # ----------------------------------------------------
 
-            result["score"] = float(
+        if not valid_indices:
+
+            return []
+
+        # ----------------------------------------------------
+        # SORT VALID DOCUMENTS
+        # ----------------------------------------------------
+
+        valid_scores = [
+
+            (
+
+                index,
+
+                scores[index]
+
+            )
+
+            for index in valid_indices
+
+        ]
+
+        valid_scores.sort(
+
+            key=lambda item: item[1],
+
+            reverse=True
+
+        )
+
+        top_results = valid_scores[:top_k]
+
+        # ----------------------------------------------------
+        # BUILD RESULTS
+        # ----------------------------------------------------
+
+        results = []
+
+        for index, score in top_results:
+
+            document = dict(
+
+                self.documents[index]
+
+            )
+
+            document["score"] = float(
                 score
             )
 
             results.append(
-                result
+                document
             )
-
-            if len(results) >= top_k:
-
-                break
 
         return results
 
 
-# =====================================================
+# ============================================================
 # LOAD SEARCH ENGINE
-# =====================================================
+# ============================================================
+
+_search_engine = None
+
 
 def load_search_engine():
 
-    if not CHUNKS_PATH.exists():
+    global _search_engine
 
-        raise FileNotFoundError(
+    if _search_engine is None:
 
-            f"Chunks file not found: "
+        _search_engine = VectorSearchEngine()
 
-            f"{CHUNKS_PATH}"
-
-        )
-
-    with open(
-
-        CHUNKS_PATH,
-
-        "r",
-
-        encoding="utf-8"
-
-    ) as file:
-
-        chunks = json.load(
-            file
-        )
-
-    return VectorSearch(
-        chunks
-    )
+    return _search_engine
 
 
-# =====================================================
-# TEST SEARCH
-# =====================================================
+# ============================================================
+# TEST
+# ============================================================
 
 if __name__ == "__main__":
 
-    search_engine = (
+    print("=" * 70)
 
-        load_search_engine()
-
+    print(
+        "TESTING VECTOR SEARCH ENGINE"
     )
 
-    query = (
+    print("=" * 70)
 
-        "What is an A1C test?"
+    engine = load_search_engine()
 
-    )
+    results = engine.search(
 
-    results = search_engine.search(
+        query=
+        "What are the symptoms of diabetes?",
 
-        query=query,
-
-        top_k=5,
-
-        language="en",
+        top_k=5
 
     )
 
     print(
-
-        "\n"
-
-        + "=" * 60
-
-    )
-
-    print(
-
-        f"QUERY: {query}"
-
-    )
-
-    print(
-
-        "=" * 60
-
+        "\nTop Results:"
     )
 
     for index, result in enumerate(
@@ -323,54 +615,14 @@ if __name__ == "__main__":
 
         print(
 
-            f"\nRESULT {index}"
+            f"\n{index}. "
+            f"{result.get('title', '')}"
 
         )
 
         print(
 
             f"Score: "
-
-            f"{result['score']:.4f}"
-
-        )
-
-        print(
-
-            f"Title: "
-
-            f"{result['title']}"
-
-        )
-
-        print(
-
-            f"Category: "
-
-            f"{result['category']}"
-
-        )
-
-        print(
-
-            f"Language: "
-
-            f"{result['language']}"
-
-        )
-
-        print(
-
-            f"Content: "
-
-            f"{result['content'][:500]}..."
-
-        )
-
-        print(
-
-            f"Source: "
-
-            f"{result['source_url']}"
+            f"{result.get('score', 0):.4f}"
 
         )

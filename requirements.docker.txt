@@ -1,0 +1,9 @@
+﻿groq
+openai
+python-dotenv
+numpy
+pandas
+minsearch
+tqdm
+sentence-transformers==3.3.1
+transformers==4.46.3

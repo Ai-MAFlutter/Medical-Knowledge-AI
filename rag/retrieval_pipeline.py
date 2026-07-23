@@ -1,6 +1,6 @@
 import sys
-import time
 from pathlib import Path
+
 
 # ============================================================
 # ADD PROJECT ROOT TO PYTHON PATH
@@ -17,6 +17,7 @@ if str(PROJECT_ROOT) not in sys.path:
 # ============================================================
 
 from rag.query_rewriter import rewrite_query
+
 from retrieval.vector_search import load_search_engine
 from retrieval.reranker import MedicalReranker
 
@@ -35,38 +36,87 @@ class MedicalRetrievalPipeline:
         print("INITIALIZING MEDICAL RETRIEVAL PIPELINE")
         print("=" * 70)
 
-        # ----------------------------------------------------
-        # Monitoring
-        # ----------------------------------------------------
+        # ====================================================
+        # MONITORING
+        # ====================================================
 
         self.logger = RequestLogger()
 
-        # ----------------------------------------------------
-        # Load Vector Search
-        # ----------------------------------------------------
+        # ====================================================
+        # LOAD VECTOR SEARCH ENGINE
+        # ====================================================
 
         print("\n[1/3] Loading Vector Search Engine...")
 
         self.vector_search = load_search_engine()
 
-        # ----------------------------------------------------
-        # Load Reranker
-        # ----------------------------------------------------
+        # ====================================================
+        # LOAD DOCUMENT RERANKER
+        # ====================================================
 
         print("\n[2/3] Loading Document Reranker...")
 
         self.reranker = MedicalReranker()
 
-        # ----------------------------------------------------
-        # Query Rewriter
-        # ----------------------------------------------------
+        # ====================================================
+        # QUERY REWRITER
+        # ====================================================
 
         print("\n[3/3] Query Rewriter Ready")
 
         print("\nPipeline initialized successfully!")
 
     # ========================================================
-    # RETRIEVE
+    # REMOVE DUPLICATE DOCUMENTS
+    # ========================================================
+
+    def remove_duplicate_documents(self, documents):
+
+        unique_documents = []
+
+        seen_documents = set()
+
+        for document in documents:
+
+            document_id = document.get(
+                "document_id"
+            )
+
+            # ------------------------------------------------
+            # If document_id does not exist
+            # use chunk_id as fallback
+            # ------------------------------------------------
+
+            if not document_id:
+
+                document_id = document.get(
+                    "chunk_id"
+                )
+
+            # ------------------------------------------------
+            # Skip duplicate documents
+            # ------------------------------------------------
+
+            if document_id in seen_documents:
+
+                continue
+
+            # ------------------------------------------------
+            # Add document to seen set
+            # ------------------------------------------------
+
+            seen_documents.add(
+                document_id
+            )
+
+            unique_documents.append(
+                document
+            )
+
+        return unique_documents
+
+    # ========================================================
+    # RETRIEVE MEDICAL DOCUMENTS
     # ========================================================
 
     def retrieve(
@@ -74,17 +124,17 @@ class MedicalRetrievalPipeline:
         query: str,
         user_type: str = "general",
         explanation_level: str = "beginner",
-        candidate_k: int = 10,
+        candidate_k: int = 20,
         final_k: int = 5
     ):
 
-        # ----------------------------------------------------
-        # START MONITORING REQUEST
-        # ----------------------------------------------------
+        # ====================================================
+        # START MONITORING
+        # ====================================================
 
-        request_data = self.logger.start_request(query)
-
-        start_time = time.time()
+        request_data = self.logger.start_request(
+            query
+        )
 
         try:
 
@@ -102,15 +152,28 @@ class MedicalRetrievalPipeline:
             print("\n[1] Rewriting query...")
 
             rewritten_result = rewrite_query(
+
                 query=query,
+
                 user_type=user_type,
+
                 explanation_level=explanation_level
+
             )
 
-            rewritten_query = rewritten_result["rewritten_query"]
+            rewritten_query = rewritten_result.get(
+
+                "rewritten_query",
+
+                query
+
+            )
 
             print("\nRewritten Query:")
-            print(rewritten_query)
+
+            print(
+                rewritten_query
+            )
 
             # =================================================
             # STEP 2: VECTOR SEARCH
@@ -119,50 +182,103 @@ class MedicalRetrievalPipeline:
             print("\n[2] Running vector search...")
 
             candidates = self.vector_search.search(
+
                 query=rewritten_query,
+
                 top_k=candidate_k
+
             )
 
             print(
-                f"Retrieved {len(candidates)} candidates."
+
+                f"Retrieved "
+                f"{len(candidates)} "
+                f"candidates."
+
             )
 
             # =================================================
-            # STEP 3: RERANKING
+            # STEP 2.5: REMOVE DUPLICATES
             # =================================================
 
-            print("\n[3] Running document reranking...")
+            candidates = (
 
-            final_documents = self.reranker.rerank(
-                query=query,
-                documents=candidates,
-                top_k=final_k
+                self.remove_duplicate_documents(
+
+                    candidates
+
+                )
+
             )
 
             print(
-                f"Selected {len(final_documents)} "
+
+                f"After deduplication: "
+
+                f"{len(candidates)} "
+
+                f"unique documents."
+
+            )
+
+            # =================================================
+            # STEP 3: DOCUMENT RERANKING
+            # =================================================
+
+            print(
+
+                "\n[3] Running "
+                "document reranking..."
+
+            )
+
+            final_documents = (
+
+                self.reranker.rerank(
+
+                    query=query,
+
+                    documents=candidates,
+
+                    top_k=final_k
+
+                )
+
+            )
+
+            print(
+
+                f"Selected "
+                f"{len(final_documents)} "
+
                 f"final documents."
+
             )
 
             # =================================================
             # FINISH MONITORING
             # =================================================
 
-            log_entry = self.logger.finish_request(
+            log_entry = (
 
-                request_data=request_data,
+                self.logger.finish_request(
 
-                rewritten_query=rewritten_query,
+                    request_data=request_data,
 
-                retrieved_documents=final_documents,
+                    rewritten_query=rewritten_query,
 
-                answer=None,
+                    retrieved_documents=final_documents,
 
-                error=None
+                    answer=None,
+
+                    error=None
+
+                )
+
             )
 
             # =================================================
-            # RETURN PIPELINE RESULT
+            # RETURN COMPLETE RESULT
             # =================================================
 
             return {
@@ -178,13 +294,29 @@ class MedicalRetrievalPipeline:
                 "monitoring": {
 
                     "request_id":
-                    log_entry["request_id"],
+
+                    log_entry.get(
+
+                        "request_id"
+
+                    ),
 
                     "latency_seconds":
-                    log_entry["latency_seconds"],
+
+                    log_entry.get(
+
+                        "latency_seconds"
+
+                    ),
 
                     "success":
-                    log_entry["success"]
+
+                    log_entry.get(
+
+                        "success"
+
+                    )
+
                 }
 
             }
@@ -206,13 +338,34 @@ class MedicalRetrievalPipeline:
                 answer=None,
 
                 error=str(error)
+
             )
 
-            print("\nERROR IN RETRIEVAL PIPELINE:")
+            print(
 
-            print(str(error))
+                "\n" + "=" * 70
 
-            raise error
+            )
+
+            print(
+
+                "ERROR IN RETRIEVAL PIPELINE"
+
+            )
+
+            print(
+
+                "=" * 70
+
+            )
+
+            print(
+
+                str(error)
+
+            )
+
+            raise
 
 
 # ============================================================
@@ -221,84 +374,205 @@ class MedicalRetrievalPipeline:
 
 if __name__ == "__main__":
 
-    pipeline = MedicalRetrievalPipeline()
+    # ========================================================
+    # INITIALIZE PIPELINE
+    # ========================================================
 
-    result = pipeline.retrieve(
+    pipeline = (
 
-        query="What is an A1C test?",
-
-        user_type="general",
-
-        explanation_level="beginner",
-
-        candidate_k=10,
-
-        final_k=5
+        MedicalRetrievalPipeline()
 
     )
 
     # ========================================================
-    # PRINT FINAL DOCUMENTS
+    # RUN RETRIEVAL
+    # ========================================================
+
+    result = (
+
+        pipeline.retrieve(
+
+            query="What is an A1C test?",
+
+            user_type="general",
+
+            explanation_level="beginner",
+
+            candidate_k=20,
+
+            final_k=5
+
+        )
+
+    )
+
+        # ========================================================
+    # RETRIEVAL SUMMARY
     # ========================================================
 
     print("\n" + "=" * 70)
-    print("FINAL RERANKED DOCUMENTS")
+    print("RETRIEVAL SUMMARY")
+    print("=" * 70)
+
+    print(
+        "\nOriginal Query:"
+    )
+
+    print(
+        result["original_query"]
+    )
+
+    print(
+        "\nRewritten Query:"
+    )
+
+    print(
+        result["rewritten_query"].get(
+            "rewritten_query",
+            ""
+        )
+    )
+
+    print(
+        "\nSearch Intent:"
+    )
+
+    print(
+        result["rewritten_query"].get(
+            "search_intent",
+            ""
+        )
+    )
+
+    print(
+        "\nMedical Entities:"
+    )
+
+    print(
+        result["rewritten_query"].get(
+            "medical_entities",
+            []
+        )
+    )
+
+    print(
+        "\nCandidate Documents Retrieved:"
+    )
+
+    print(
+        len(
+            result["candidates"]
+        )
+    )
+
+    print(
+        "\nFinal Documents Selected:"
+    )
+
+    print(
+        len(
+            result["documents"]
+        )
+    )
+
+    # ========================================================
+    # PRINT SELECTED SOURCES
+    # ========================================================
+
+    print("\n" + "=" * 70)
+    print("SELECTED MEDICAL SOURCES")
     print("=" * 70)
 
     for index, document in enumerate(
-
         result["documents"],
-
         start=1
-
     ):
 
-        print(f"\nRESULT {index}")
-
         print(
-            f"Title: "
-            f"{document.get('title', '')}"
+            f"\nSOURCE {index}"
         )
 
         print(
-            f"Category: "
-            f"{document.get('category', '')}"
+            "\nTitle:"
         )
 
         print(
-            f"Rerank Score: "
+            document.get(
+                "title",
+                ""
+            )
+        )
+
+        print(
+            "\nCategory:"
+        )
+
+        print(
+            document.get(
+                "category",
+                ""
+            )
+        )
+
+        print(
+            "\nRerank Score:"
+        )
+
+        print(
             f"{document.get('rerank_score', 0):.4f}"
         )
 
         print(
-            f"Source: "
-            f"{document.get('source_url', '')}"
+            "\nSource URL:"
         )
 
         print(
-            f"Content: "
-            f"{document.get('content', '')[:500]}..."
+            document.get(
+                "source_url",
+                ""
+            )
         )
 
     # ========================================================
-    # PRINT MONITORING INFO
+    # MONITORING INFORMATION
     # ========================================================
 
     print("\n" + "=" * 70)
     print("MONITORING INFORMATION")
     print("=" * 70)
 
-    print(
-        f"Request ID: "
-        f"{result['monitoring']['request_id']}"
+    monitoring = result.get(
+        "monitoring",
+        {}
     )
 
     print(
-        f"Latency: "
-        f"{result['monitoring']['latency_seconds']} seconds"
+        "\nRequest ID:"
     )
 
     print(
-        f"Success: "
-        f"{result['monitoring']['success']}"
+        monitoring.get(
+            "request_id"
+        )
+    )
+
+    print(
+        "\nLatency:"
+    )
+
+    print(
+        monitoring.get(
+            "latency_seconds"
+        ),
+        "seconds"
+    )
+
+    print(
+        "\nSuccess:"
+    )
+
+    print(
+        monitoring.get(
+            "success"
+        )
     )

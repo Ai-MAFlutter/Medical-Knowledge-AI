@@ -19,6 +19,10 @@ qdrant-client
 # Web Application
 streamlit
 
+# API
+fastapi
+uvicorn
+
 # Visualization
 plotly
 
