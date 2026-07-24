@@ -1,5 +1,6 @@
 import json
 import sys
+import time
 from pathlib import Path
 
 
@@ -9,10 +10,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-sys.path.insert(
-    0,
-    str(PROJECT_ROOT)
-)
+sys.path.insert(0, str(PROJECT_ROOT))
 
 
 # =====================================================
@@ -25,10 +23,6 @@ from retrieval.keyword_search import (
 
 from retrieval.bm25_search import (
     load_search_engine as load_bm25_search
-)
-
-from retrieval.vector_search import (
-    load_search_engine as load_vector_search
 )
 
 from retrieval.hybrid_search import (
@@ -46,74 +40,55 @@ EVALUATION_PATH = (
     / "retrieval_queries.json"
 )
 
+RESULTS_PATH = (
+    PROJECT_ROOT
+    / "evaluation"
+    / "retrieval_results.json"
+)
+
 
 # =====================================================
 # METRICS
 # =====================================================
 
-def hit_rate_at_k(
-    retrieved_ids,
-    relevant_ids,
-):
+def hit_rate_at_k(retrieved_ids, relevant_ids):
 
     return int(
-
         any(
-
             doc_id in relevant_ids
-
             for doc_id in retrieved_ids
-
         )
-
     )
 
 
-def recall_at_k(
-    retrieved_ids,
-    relevant_ids,
-):
+def recall_at_k(retrieved_ids, relevant_ids):
 
     if not relevant_ids:
-
         return 0.0
 
-
     retrieved_relevant = len(
-
         set(retrieved_ids)
         &
         set(relevant_ids)
-
     )
 
-
     return (
-
         retrieved_relevant
         /
         len(relevant_ids)
-
     )
 
 
-def reciprocal_rank(
-    retrieved_ids,
-    relevant_ids,
-):
+def reciprocal_rank(retrieved_ids, relevant_ids):
 
     for rank, doc_id in enumerate(
-
         retrieved_ids,
-
         start=1
-
     ):
 
         if doc_id in relevant_ids:
 
             return 1.0 / rank
-
 
     return 0.0
 
@@ -123,147 +98,106 @@ def reciprocal_rank(
 # =====================================================
 
 def evaluate_retriever(
-
     search_engine,
-
     queries,
-
     top_k=5,
-
 ):
 
     hits = []
-
     recalls = []
-
     reciprocal_ranks = []
 
+    start_time = time.time()
 
     for index, item in enumerate(
-
         queries,
-
         start=1
-
     ):
 
         query = item["query"]
 
         relevant_ids = set(
-
-            item[
-                "relevant_document_ids"
-            ]
-
+            item["relevant_document_ids"]
         )
-
 
         results = search_engine.search(
-
             query=query,
-
             top_k=top_k,
-
-            language=item.get(
-                "language"
-            ),
-
+            language=item.get("language"),
         )
-
 
         retrieved_ids = [
-        result["document_id"]
-        for result in results
-    ]
-
+            result["document_id"]
+            for result in results
+        ]
 
         hits.append(
-
             hit_rate_at_k(
-
                 retrieved_ids,
-
                 relevant_ids
-
             )
-
         )
-
 
         recalls.append(
-
             recall_at_k(
-
                 retrieved_ids,
-
                 relevant_ids
-
             )
-
         )
-
 
         reciprocal_ranks.append(
-
             reciprocal_rank(
-
                 retrieved_ids,
-
                 relevant_ids
-
             )
-
         )
-
 
         if index % 25 == 0:
 
+            elapsed = time.time() - start_time
+
             print(
-
                 f"Evaluated "
-
                 f"{index}/"
-
                 f"{len(queries)} "
-
-                f"queries"
-
+                f"queries "
+                f"({elapsed:.2f}s)",
+                flush=True
             )
 
+    total_time = time.time() - start_time
 
     return {
 
         "hit_rate": (
-
             sum(hits)
-
             /
-
             len(hits)
-
         ),
 
         "recall": (
-
             sum(recalls)
-
             /
-
             len(recalls)
-
         ),
 
         "mrr": (
-
             sum(reciprocal_ranks)
-
             /
-
             len(reciprocal_ranks)
-
         ),
 
         "total_queries": len(queries),
+
+        "total_time_seconds": round(
+            total_time,
+            2
+        ),
+
+        "average_latency_seconds": round(
+            total_time / len(queries),
+            4
+        ),
 
     }
 
@@ -272,42 +206,28 @@ def evaluate_retriever(
 # PRINT RESULTS
 # =====================================================
 
-def print_results(
+def print_results(name, results):
 
-    name,
-
-    results,
-
-):
+    print(f"\n{name}:")
 
     print(
-
-        f"\n{name}:"
-
-    )
-
-    print(
-
         f"Hit Rate@5: "
-
         f"{results['hit_rate']:.4f}"
-
     )
 
     print(
-
         f"Recall@5: "
-
         f"{results['recall']:.4f}"
-
     )
 
     print(
-
         f"MRR@5: "
-
         f"{results['mrr']:.4f}"
+    )
 
+    print(
+        f"Average Latency: "
+        f"{results['average_latency_seconds']:.4f}s"
     )
 
 
@@ -317,53 +237,37 @@ def print_results(
 
 if __name__ == "__main__":
 
-    print(
-
-        "=" * 70
-
-    )
+    print("=" * 70)
 
     print(
-
-        "RETRIEVAL EVALUATION"
-
+        "RETRIEVAL EVALUATION",
+        flush=True
     )
 
-    print(
-
-        "=" * 70
-
-    )
+    print("=" * 70)
 
 
-    # ---------------------------------------------
-    # Load Evaluation Queries
-    # ---------------------------------------------
+    # =================================================
+    # LOAD QUERIES
+    # =================================================
 
     with open(
-
         EVALUATION_PATH,
-
         "r",
-
         encoding="utf-8"
-
     ) as file:
 
-        queries = json.load(
-
-            file
-
-        )
+        queries = json.load(file)
 
 
     print(
-
         f"\nEvaluation queries: "
-
-        f"{len(queries)}"
-
+        f"{len(queries)}",
+        flush=True
     )
+
+
+    all_results = {}
 
 
     # =================================================
@@ -371,31 +275,24 @@ if __name__ == "__main__":
     # =================================================
 
     print(
-
-        "\nEvaluating Keyword Search..."
-
+        "\nEvaluating Keyword Search...",
+        flush=True
     )
 
+    keyword_start = time.time()
 
-    keyword_search = (
+    keyword_search = load_keyword_search()
 
-        load_keyword_search()
-
+    print(
+        f"Keyword Search loaded in "
+        f"{time.time() - keyword_start:.2f}s",
+        flush=True
     )
 
-
-    keyword_results = (
-
-        evaluate_retriever(
-
-            search_engine=keyword_search,
-
-            queries=queries,
-
-            top_k=5,
-
-        )
-
+    all_results["Keyword Search"] = evaluate_retriever(
+        search_engine=keyword_search,
+        queries=queries,
+        top_k=5,
     )
 
 
@@ -404,64 +301,24 @@ if __name__ == "__main__":
     # =================================================
 
     print(
-
-        "\nEvaluating BM25..."
-
+        "\nEvaluating BM25...",
+        flush=True
     )
 
+    bm25_start = time.time()
 
-    bm25_search = (
-
-        load_bm25_search()
-
-    )
-
-
-    bm25_results = (
-
-        evaluate_retriever(
-
-            search_engine=bm25_search,
-
-            queries=queries,
-
-            top_k=5,
-
-        )
-
-    )
-
-
-    # =================================================
-    # VECTOR SEARCH
-    # =================================================
+    bm25_search = load_bm25_search()
 
     print(
-
-        "\nEvaluating Vector Search..."
-
+        f"BM25 loaded in "
+        f"{time.time() - bm25_start:.2f}s",
+        flush=True
     )
 
-
-    vector_search = (
-
-        load_vector_search()
-
-    )
-
-
-    vector_results = (
-
-        evaluate_retriever(
-
-            search_engine=vector_search,
-
-            queries=queries,
-
-            top_k=5,
-
-        )
-
+    all_results["BM25"] = evaluate_retriever(
+        search_engine=bm25_search,
+        queries=queries,
+        top_k=5,
     )
 
 
@@ -470,31 +327,24 @@ if __name__ == "__main__":
     # =================================================
 
     print(
-
-        "\nEvaluating Hybrid Search..."
-
+        "\nEvaluating Hybrid Search...",
+        flush=True
     )
 
+    hybrid_start = time.time()
 
-    hybrid_search = (
+    hybrid_search = load_hybrid_search()
 
-        load_hybrid_search()
-
+    print(
+        f"Hybrid Search loaded in "
+        f"{time.time() - hybrid_start:.2f}s",
+        flush=True
     )
 
-
-    hybrid_results = (
-
-        evaluate_retriever(
-
-            search_engine=hybrid_search,
-
-            queries=queries,
-
-            top_k=5,
-
-        )
-
+    all_results["Hybrid Search"] = evaluate_retriever(
+        search_engine=hybrid_search,
+        queries=queries,
+        top_k=5,
     )
 
 
@@ -503,108 +353,83 @@ if __name__ == "__main__":
     # =================================================
 
     print(
-
         "\n"
-
         + "=" * 70
-
     )
 
     print(
-
         "FINAL RESULTS"
-
     )
 
     print(
-
         "=" * 70
-
     )
 
 
-    print_results(
+    for name, results in all_results.items():
 
-        "Keyword Search",
-
-        keyword_results
-
-    )
-
-
-    print_results(
-
-        "BM25",
-
-        bm25_results
-
-    )
-
-
-    print_results(
-
-        "Vector Search",
-
-        vector_results
-
-    )
-
-
-    print_results(
-
-        "Hybrid Search",
-
-        hybrid_results
-
-    )
+        print_results(
+            name,
+            results
+        )
 
 
     # =================================================
     # FIND WINNER
     # =================================================
 
-    all_results = {
+    winner = max(
+        all_results,
+        key=lambda name:
+        all_results[name]["mrr"]
+    )
 
-        "Keyword Search": keyword_results,
 
-        "BM25": bm25_results,
+    print(
+        "\n"
+        + "=" * 70
+    )
 
-        "Vector Search": vector_results,
+    print(
+        f"WINNER BASED ON MRR@5: "
+        f"{winner}"
+    )
 
-        "Hybrid Search": hybrid_results,
+    print(
+        "=" * 70
+    )
+
+
+    # =================================================
+    # SAVE RESULTS
+    # =================================================
+
+    final_output = {
+
+        "evaluation_queries": len(queries),
+
+        "results": all_results,
+
+        "winner": winner,
 
     }
 
 
-    winner = max(
+    with open(
+        RESULTS_PATH,
+        "w",
+        encoding="utf-8"
+    ) as file:
 
-        all_results,
+        json.dump(
+            final_output,
+            file,
+            indent=2,
+            ensure_ascii=False
+        )
 
-        key=lambda name:
-
-        all_results[name]["mrr"]
-
-    )
-
-
-    print(
-
-        "\n"
-
-        + "=" * 70
-
-    )
 
     print(
-
-        f"WINNER BASED ON MRR@5: "
-
-        f"{winner}"
-
-    )
-
-    print(
-
-        "=" * 70
-
+        f"\nResults saved to:\n"
+        f"{RESULTS_PATH}"
     )

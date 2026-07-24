@@ -25,3 +25,5 @@ data/processed/
 # OS
 .DS_Store
 Thumbs.db
+# Monitoring Logs
+monitoring/logs/*.jsonl

@@ -1,5 +1,7 @@
 import sys
 from pathlib import Path
+from datetime import datetime
+import json
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -39,7 +41,7 @@ app = FastAPI(
 
 
 # ============================================================
-# REQUEST MODEL
+# REQUEST MODELS
 # ============================================================
 
 class MedicalQuestion(BaseModel):
@@ -49,11 +51,34 @@ class MedicalQuestion(BaseModel):
     explanation_level: str = "beginner"
 
 
+class UserFeedback(BaseModel):
+
+    request_id: str
+
+    feedback: str
+
+    query: str = ""
+
+
 # ============================================================
 # GLOBAL PIPELINE
 # ============================================================
 
 pipeline = None
+
+
+# ============================================================
+# FEEDBACK STORAGE
+# ============================================================
+
+FEEDBACK_DIR = PROJECT_ROOT / "monitoring" / "logs"
+
+FEEDBACK_DIR.mkdir(
+    parents=True,
+    exist_ok=True
+)
+
+FEEDBACK_FILE = FEEDBACK_DIR / "feedback.jsonl"
 
 
 # ============================================================
@@ -167,6 +192,121 @@ def ask_medical_question(
             )
 
         }
+
+    except Exception as error:
+
+        raise HTTPException(
+
+            status_code=500,
+
+            detail=str(error)
+
+        )
+
+
+# ============================================================
+# USER FEEDBACK
+# ============================================================
+
+@app.post("/feedback")
+def save_feedback(
+    feedback: UserFeedback
+):
+
+    try:
+
+        # ----------------------------------------------------
+        # VALIDATE FEEDBACK
+        # ----------------------------------------------------
+
+        allowed_feedback = [
+
+            "positive",
+
+            "negative"
+
+        ]
+
+        if feedback.feedback not in allowed_feedback:
+
+            raise HTTPException(
+
+                status_code=400,
+
+                detail=(
+                    "Feedback must be "
+                    "'positive' or 'negative'."
+                )
+
+            )
+
+        # ----------------------------------------------------
+        # CREATE FEEDBACK RECORD
+        # ----------------------------------------------------
+
+        feedback_record = {
+
+            "request_id":
+            feedback.request_id,
+
+            "feedback":
+            feedback.feedback,
+
+            "query":
+            feedback.query,
+
+            "timestamp":
+            datetime.utcnow().isoformat()
+
+        }
+
+        # ----------------------------------------------------
+        # SAVE AS JSONL
+        # ----------------------------------------------------
+
+        with open(
+
+            FEEDBACK_FILE,
+
+            "a",
+
+            encoding="utf-8"
+
+        ) as file:
+
+            file.write(
+
+                json.dumps(
+
+                    feedback_record,
+
+                    ensure_ascii=False
+
+                )
+
+                + "\n"
+
+            )
+
+        # ----------------------------------------------------
+        # RESPONSE
+        # ----------------------------------------------------
+
+        return {
+
+            "status": "success",
+
+            "message":
+            "Feedback saved successfully.",
+
+            "feedback":
+            feedback_record
+
+        }
+
+    except HTTPException:
+
+        raise
 
     except Exception as error:
 

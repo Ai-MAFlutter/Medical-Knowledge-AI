@@ -1,0 +1,30 @@
+{
+  "evaluation_queries": 150,
+  "results": {
+    "Keyword Search": {
+      "hit_rate": 0.66,
+      "recall": 0.66,
+      "mrr": 0.5432222222222223,
+      "total_queries": 150,
+      "total_time_seconds": 1.53,
+      "average_latency_seconds": 0.0102
+    },
+    "BM25": {
+      "hit_rate": 0.9066666666666666,
+      "recall": 0.9066666666666666,
+      "mrr": 0.8324444444444444,
+      "total_queries": 150,
+      "total_time_seconds": 0.81,
+      "average_latency_seconds": 0.0054
+    },
+    "Hybrid Search": {
+      "hit_rate": 0.9066666666666666,
+      "recall": 0.9066666666666666,
+      "mrr": 0.8324444444444444,
+      "total_queries": 150,
+      "total_time_seconds": 1.33,
+      "average_latency_seconds": 0.0089
+    }
+  },
+  "winner": "BM25"
+}

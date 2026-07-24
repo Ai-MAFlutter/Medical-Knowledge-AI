@@ -1,6 +1,10 @@
+import sys
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 import json
 import time
-from pathlib import Path
+
 
 from rag.retrieval_pipeline import MedicalRetrievalPipeline
 from rag.generator import (

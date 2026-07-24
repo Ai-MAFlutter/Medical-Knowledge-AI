@@ -128,9 +128,20 @@ st.markdown(
     }}
 
 
-    [data-testid="stHeader"] {{
-        background-color: transparent;
+    /* ========================================================
+       STREAMLIT MULTI-PAGE NAVIGATION
+    ======================================================== */
+
+    [data-testid="stSidebarNav"] a {{
+        color: #ffffff !important;
     }}
+
+    [data-testid="stSidebarNav"] a span {{
+        color: #ffffff !important;
+    }}
+
+
+    /* باقي الـ CSS بتاعك هنا */
 
 
     /* ========================================================
@@ -829,6 +840,76 @@ if ask_button:
                             "request_id"
                         )
                     )
+                    # ============================================================
+            # USER FEEDBACK
+            # ============================================================
+
+            st.markdown("### 👍 Was this answer helpful?")
+
+            feedback_col1, feedback_col2 = st.columns(2)
+
+            with feedback_col1:
+
+                if st.button(
+                    "👍 Yes",
+                    use_container_width=True
+                ):
+
+                    try:
+
+                        feedback_response = requests.post(
+                            "http://127.0.0.1:8000/feedback",
+                            json={
+                                "request_id": monitoring.get("request_id"),
+                                "feedback": "positive",
+                                "query": query
+                            },
+                            timeout=10
+                        )
+
+                        if feedback_response.status_code == 200:
+
+                            st.success(
+                                "Thank you for your feedback! 🙏"
+                            )
+
+                    except Exception:
+
+                        st.warning(
+                            "Feedback could not be saved."
+                        )
+
+
+            with feedback_col2:
+
+                if st.button(
+                    "👎 No",
+                    use_container_width=True
+                ):
+
+                    try:
+
+                        feedback_response = requests.post(
+                            "http://127.0.0.1:8000/feedback",
+                            json={
+                                "request_id": monitoring.get("request_id"),
+                                "feedback": "negative",
+                                "query": query
+                            },
+                            timeout=10
+                        )
+
+                        if feedback_response.status_code == 200:
+
+                            st.info(
+                                "Thank you. Your feedback helps improve the system."
+                            )
+
+                    except Exception:
+
+                        st.warning(
+                            "Feedback could not be saved."
+                        )
 
                 # ====================================================
                 # SOURCES
