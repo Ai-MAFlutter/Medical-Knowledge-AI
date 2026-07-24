@@ -6,25 +6,33 @@
       "recall": 0.66,
       "mrr": 0.5432222222222223,
       "total_queries": 150,
-      "total_time_seconds": 1.53,
-      "average_latency_seconds": 0.0102
+      "total_time_seconds": 1.88,
+      "average_latency_seconds": 0.0126
     },
     "BM25": {
       "hit_rate": 0.9066666666666666,
       "recall": 0.9066666666666666,
       "mrr": 0.8324444444444444,
       "total_queries": 150,
-      "total_time_seconds": 0.81,
-      "average_latency_seconds": 0.0054
+      "total_time_seconds": 0.96,
+      "average_latency_seconds": 0.0064
+    },
+    "Vector Search": {
+      "hit_rate": 1.0,
+      "recall": 1.0,
+      "mrr": 1.0,
+      "total_queries": 150,
+      "total_time_seconds": 2.5,
+      "average_latency_seconds": 0.0167
     },
     "Hybrid Search": {
-      "hit_rate": 0.9066666666666666,
-      "recall": 0.9066666666666666,
-      "mrr": 0.8324444444444444,
+      "hit_rate": 1.0,
+      "recall": 1.0,
+      "mrr": 0.9344444444444444,
       "total_queries": 150,
-      "total_time_seconds": 1.33,
-      "average_latency_seconds": 0.0089
+      "total_time_seconds": 3.64,
+      "average_latency_seconds": 0.0243
     }
   },
-  "winner": "BM25"
+  "winner": "Vector Search"
 }

@@ -1,4 +1,10 @@
-from retrieval.bm25_search import load_search_engine as load_bm25_search
+from retrieval.bm25_search import (
+    load_search_engine as load_bm25_search
+)
+
+from retrieval.vector_search import (
+    load_search_engine as load_vector_search
+)
 
 
 class HybridSearch:
@@ -150,32 +156,37 @@ def load_search_engine():
 
     bm25_engine = load_bm25_search()
 
-    # =================================================
-    # IMPORTANT
-    # =================================================
-    # Vector search is temporarily disabled because
-    # SentenceTransformer crashes the Python process
-    # on the current Windows/Python environment.
-    #
-    # The Hybrid Search remains functional through
-    # BM25 fallback.
-    # =================================================
-
-    vector_engine = None
-
     print(
-        "Vector search disabled safely."
+        "Loading Vector Search engine..."
     )
 
-    print(
-        "Hybrid Search will use BM25 fallback."
-    )
+    try:
+
+        vector_engine = load_vector_search()
+
+        print(
+            "Vector Search loaded successfully."
+        )
+
+    except Exception as error:
+
+        print(
+            f"Vector Search unavailable: {error}"
+        )
+
+        vector_engine = None
+
+        print(
+            "Hybrid Search will use BM25 fallback."
+        )
 
     return HybridSearch(
-        bm25_engine=bm25_engine,
-        vector_engine=vector_engine,
-    )
 
+        bm25_engine=bm25_engine,
+
+        vector_engine=vector_engine,
+
+    )
 
 if __name__ == "__main__":
 

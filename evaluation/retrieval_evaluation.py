@@ -24,6 +24,9 @@ from retrieval.keyword_search import (
 from retrieval.bm25_search import (
     load_search_engine as load_bm25_search
 )
+from retrieval.vector_search import (
+    load_search_engine as load_vector_search
+)
 
 from retrieval.hybrid_search import (
     load_search_engine as load_hybrid_search
@@ -320,6 +323,31 @@ if __name__ == "__main__":
         queries=queries,
         top_k=5,
     )
+    # =================================================
+    # VECTOR SEARCH
+    # =================================================
+
+    print(
+        "\nEvaluating Vector Search...",
+        flush=True
+    )
+
+    vector_start = time.time()
+
+    vector_search = load_vector_search()
+
+    print(
+        f"Vector Search loaded in "
+        f"{time.time() - vector_start:.2f}s",
+        flush=True
+    )
+
+    all_results["Vector Search"] = evaluate_retriever(
+        search_engine=vector_search,
+        queries=queries,
+        top_k=5,
+    )
+
 
 
     # =================================================

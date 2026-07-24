@@ -18,5 +18,5 @@ COPY retrieval ./retrieval
 COPY monitoring ./monitoring
 COPY data ./data
 COPY ingestion ./ingestion
-
-CMD ["python", "-m", "rag.test_generator"]
+COPY api.py .
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]

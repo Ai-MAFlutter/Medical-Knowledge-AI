@@ -2,8 +2,10 @@ import os
 import json
 from pathlib import Path
 
+from dotenv import load_dotenv
 import numpy as np
 from sentence_transformers import SentenceTransformer
+load_dotenv()
 
 
 # ============================================================

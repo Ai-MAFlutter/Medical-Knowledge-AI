@@ -1,5 +1,7 @@
 ﻿groq
 openai
+uvicorn
+fastapi
 python-dotenv
 numpy
 pandas
