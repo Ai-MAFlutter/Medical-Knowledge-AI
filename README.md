@@ -1,6 +1,4 @@
-آسفة يا مارينا 😅 اتفضلي **الـ README كامل في Code Block واحد فقط** — انسخيه كله مرة واحدة:
 
-````markdown
 # 🩺 Medical Knowledge AI
 
 <p align="center">
