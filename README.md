@@ -67,7 +67,7 @@ Watch the Medical Knowledge AI system in action:
 
 📹 **Watch the demo video:**
 
-[▶️ Click here to watch the Medical Knowledge AI Demo](./assets/medical-knowledge-ai-demo.mp4)
+[▶️ Download and Watch the Medical Knowledge AI Demo](./assets/medical-knowledge-ai-demo.mp4)
 
 ---
 
