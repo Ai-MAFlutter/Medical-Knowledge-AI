@@ -53,6 +53,24 @@ The main goal is to build a **reliable, measurable, observable, and production-o
 
 ---
 
+## 🎥 Project Demo
+
+Watch the Medical Knowledge AI system in action:
+
+<p align="center">
+
+🎬 **Application Demo**
+
+</p>
+
+> The demo showcases the complete RAG workflow, including medical question answering, query rewriting, semantic retrieval, document reranking, grounded answer generation, and the monitoring dashboard.
+
+📹 **Watch the demo video:**
+
+[▶️ Click here to watch the Medical Knowledge AI Demo](./assets/medical-knowledge-ai-demo.mp4)
+
+---
+
 ## 🧠 System Architecture
 
 ```text
