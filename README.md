@@ -1,4 +1,3 @@
-
 # 🩺 Medical Knowledge AI
 
 <p align="center">
@@ -8,11 +7,10 @@
 <img src="https://img.shields.io/badge/LLM-Groq-orange">
 <img src="https://img.shields.io/badge/Vector%20Search-Embeddings-green">
 <img src="https://img.shields.io/badge/Hybrid%20Search-BM25%20%2B%20Vector-red">
-<img src="https://img.shields.io/badge/Reranking-Enabled-blueviolet">
-<img src="https://img.shields.io/badge/Evaluation-RAGAS%20%7C%20Custom-success">
 <img src="https://img.shields.io/badge/Monitoring-Enabled-success">
 <img src="https://img.shields.io/badge/Docker-Ready-blue?logo=docker">
 <img src="https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?logo=streamlit">
+<img src="https://img.shields.io/badge/Kestra-Orchestration-orange">
 <img src="https://img.shields.io/badge/License-MIT-yellow">
 
 </p>
@@ -20,58 +18,83 @@
 <h1 align="center">🩺 Medical Knowledge AI</h1>
 
 <p align="center">
-<b>An end-to-end Retrieval-Augmented Generation (RAG) system for reliable medical knowledge retrieval and question answering.</b>
+<b>An end-to-end Retrieval-Augmented Generation (RAG) system for reliable medical knowledge retrieval and grounded question answering.</b>
 </p>
 
 <p align="center">
-Built with modern AI engineering practices including hybrid retrieval, vector search, reranking, evaluation, observability, monitoring, and containerized deployment.
+Built with modern AI engineering practices including hybrid retrieval, vector search, reranking, query rewriting, evaluation, observability, monitoring, workflow orchestration, and containerized deployment.
 </p>
 
 ---
 
 ## 🚀 Overview
 
-**Medical Knowledge AI** is an end-to-end AI system designed to retrieve and generate grounded answers from a curated medical knowledge base.
+**Medical Knowledge AI** is an end-to-end AI Engineering project designed to retrieve and generate grounded answers from a curated medical knowledge base.
 
-Unlike a simple chatbot that relies only on an LLM, this project implements a complete AI engineering pipeline focused on:
+Unlike a simple chatbot that relies only on an LLM, this project implements a complete and measurable RAG pipeline.
 
-- 🔎 Information Retrieval
-- 📚 BM25 Lexical Search
+The system combines:
+
+- 🔎 Keyword Search
+- 📚 BM25 Retrieval
 - 🧠 Vector Semantic Search
-- 🔀 Hybrid Retrieval
+- 🔀 Hybrid Search
 - 🎯 Document Reranking
 - 🧩 Query Rewriting
 - 🤖 Retrieval-Augmented Generation
 - 📊 Retrieval Evaluation
-- 🧪 Generation Evaluation
+- 🧪 LLM Generation Evaluation
 - 📈 Monitoring and Observability
-- 🐳 Docker Deployment
-- ⚙️ Workflow Orchestration
-- 📊 Interactive Monitoring Dashboard
+- 🖥️ Streamlit Web Application
+- 🐳 Docker Containerization
+- ⚙️ Kestra Workflow Orchestration
 
-The main goal is to build a **reliable, measurable, observable, and production-oriented RAG system** instead of a simple LLM chatbot.
+The main goal is to build a **reliable, measurable, observable, reproducible, and production-oriented RAG system**.
 
 ---
 
 ## 🎥 Project Demo
 
-Watch the Medical Knowledge AI system in action:
-
 <p align="center">
 
-🎬 **Application Demo**
+🎬 <b>Medical Knowledge AI Demo</b>
 
 </p>
 
-> The demo showcases the complete RAG workflow, including medical question answering, query rewriting, semantic retrieval, document reranking, grounded answer generation, and the monitoring dashboard.
+The demo showcases the complete application workflow, including:
+
+- Asking medical questions
+- Query rewriting
+- Semantic retrieval
+- Document reranking
+- Context building
+- Grounded answer generation
+- Monitoring and observability dashboard
 
 📹 **Watch the demo video:**
 
-[▶️ Download and Watch the Medical Knowledge AI Demo](./assets/medical-knowledge-ai-demo.mp4)
+[▶️ Click here to watch the Medical Knowledge AI Demo](./assets/medical-knowledge-ai-demo.mp4)
 
 ---
 
-## 🧠 System Architecture
+## 🧠 Problem Description
+
+Medical information is distributed across large collections of documents, making it difficult to quickly retrieve relevant and reliable information.
+
+A simple LLM chatbot can generate fluent answers but may produce:
+
+- Unsupported information
+- Hallucinations
+- Incorrect medical claims
+- Answers that are not grounded in a trusted knowledge source
+
+This project addresses the problem by building a **Retrieval-Augmented Generation system** that retrieves relevant medical knowledge before generating an answer.
+
+The LLM is therefore provided with relevant retrieved context instead of relying only on its internal knowledge.
+
+---
+
+## 🏗️ System Architecture
 
 ```text
                          ┌────────────────────┐
@@ -121,135 +144,205 @@ Watch the Medical Knowledge AI system in action:
                          ┌────────────────────┐
                          │    Grounded Answer  │
                          └────────────────────┘
-````
+```
 
 ---
 
-## 🔍 Retrieval Pipeline
+## 🔄 Complete RAG Pipeline
 
-The retrieval layer combines multiple search strategies to improve recall and relevance.
+The complete pipeline follows this workflow:
+
+```text
+User Question
+      │
+      ▼
+Query Rewriting
+      │
+      ▼
+Keyword Search ──────┐
+      │              │
+      ▼              │
+BM25 Search ────────┤
+      │              │
+      ▼              │
+Vector Search ──────┘
+      │
+      ▼
+Hybrid Retrieval
+      │
+      ▼
+Document Reranking
+      │
+      ▼
+Context Assembly
+      │
+      ▼
+Groq LLM
+      │
+      ▼
+Grounded Medical Answer
+```
+
+---
+
+## 🔍 Retrieval System
+
+The retrieval layer supports multiple retrieval strategies.
 
 ### 🔹 Keyword Search
 
-Keyword search is useful for exact medical terms and important keywords.
+Keyword search is useful for exact medical terminology and important keywords.
 
 ```text
 User Query
-    ↓
+    │
+    ▼
 Keyword Matching
-    ↓
+    │
+    ▼
 Relevant Medical Documents
 ```
+
+This approach is useful when the query contains specific medical terms that should be matched directly.
 
 ---
 
 ### 🔹 BM25 Search
 
-BM25 is a lexical information retrieval algorithm that ranks documents based on term frequency and document relevance.
+BM25 provides strong lexical retrieval performance and is useful when exact terminology matters.
 
 ```text
 User Query
-    ↓
+    │
+    ▼
 Tokenization
-    ↓
+    │
+    ▼
 BM25 Scoring
-    ↓
+    │
+    ▼
 Ranked Documents
 ```
 
-BM25 is particularly useful when exact medical terminology is important.
+BM25 is particularly useful for retrieving documents that contain important exact words from the user's query.
 
 ---
 
 ### 🔹 Vector Semantic Search
 
-Documents are converted into embeddings and searched based on semantic similarity.
+Documents are transformed into vector embeddings and searched semantically.
 
 ```text
-User Query
-    ↓
-Query Embedding
-    ↓
-Similarity Search
-    ↓
-Semantic Results
+Medical Documents
+       │
+       ▼
+   Embeddings
+       │
+       ▼
+ Vector Index
+       │
+       ▼
+Semantic Similarity Search
+       │
+       ▼
+Relevant Documents
 ```
 
-This allows the system to retrieve documents with similar meaning even when the exact words are different.
+Vector search allows the system to retrieve documents based on meaning rather than exact word matching.
+
+This helps handle:
+
+- Synonyms
+- Different wording
+- Similar medical concepts
+- Semantic variations of questions
 
 ---
 
-### 🔹 Hybrid Search
+### 🔀 Hybrid Search
 
-The system combines lexical and semantic retrieval.
+The system combines lexical and semantic retrieval strategies.
 
 ```text
-                 ┌──────────────┐
-                 │ BM25 Search  │
-                 └──────┬───────┘
-                        │
-                        ▼
-                   BM25 Results
-                        │
-                        │
-                        ├──────────────┐
-                        │              │
-                        ▼              ▼
-                ┌──────────────┐ ┌──────────────┐
-                │ Vector Search│ │ Score Fusion │
-                └──────┬───────┘ └──────┬───────┘
-                       │                │
-                       ▼                ▼
-                 Vector Results ──► Hybrid Results
+┌─────────────────┐
+│   BM25 Search   │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ BM25 Candidates │
+└────────┬────────┘
+         │
+         ├──────────────┐
+         │              │
+         ▼              ▼
+┌─────────────┐  ┌───────────────┐
+│ Vector      │  │ Keyword       │
+│ Search      │  │ Search        │
+└──────┬──────┘  └───────┬───────┘
+       │                 │
+       └────────┬────────┘
+                ▼
+        Score Combination
+                │
+                ▼
+          Hybrid Results
 ```
 
 Hybrid retrieval improves robustness by combining:
 
-* Exact lexical matching
-* Semantic similarity
-* Medical terminology matching
-* Query variations
+- Exact lexical matching
+- Semantic similarity
+- Multiple retrieval signals
+
+This allows the system to handle both exact medical terminology and semantically similar queries.
 
 ---
 
-## 🎯 Reranking
+## 🎯 Document Reranking
 
-After retrieving candidate documents, the system applies a reranking stage to improve the final ordering of results.
+After the initial retrieval stage, candidate documents are reranked to improve the final context quality.
 
 ```text
 Initial Retrieval
-        ↓
+        │
+        ▼
 Candidate Documents
-        ↓
-Reranking
-        ↓
+        │
+        ▼
+Document Reranking
+        │
+        ▼
 Most Relevant Context
 ```
 
-Reranking helps ensure that the LLM receives the most relevant documents instead of simply using the first retrieved results.
+Reranking improves the quality of the context passed to the LLM by prioritizing the most relevant retrieved documents.
 
 ---
 
 ## 🧩 Query Rewriting
 
-The system supports query rewriting to improve retrieval quality.
+The system includes a query rewriting stage that improves the original user question before retrieval.
 
 ```text
 Original User Query
-        ↓
-Query Rewriter
-        ↓
+        │
+        ▼
+Query Rewriting
+        │
+        ▼
 Improved Search Query
-        ↓
+        │
+        ▼
 Retrieval Pipeline
 ```
 
-Query rewriting can improve retrieval when the original question is:
+Query rewriting can help:
 
-* Ambiguous
-* Too short
-* Informal
-* Missing important medical keywords
+- Improve search clarity
+- Expand ambiguous questions
+- Improve retrieval recall
+- Create better search queries
 
 ---
 
@@ -259,142 +352,190 @@ The final answer is generated using retrieved medical context.
 
 ```text
 User Question
-      ↓
-Query Processing
-      ↓
+      │
+      ▼
 Query Rewriting
-      ↓
+      │
+      ▼
 Hybrid Retrieval
-      ↓
-Reranking
-      ↓
-Context Assembly
-      ↓
-LLM Generator
-      ↓
+      │
+      ▼
+Document Reranking
+      │
+      ▼
+Relevant Context
+      │
+      ▼
+Prompt Construction
+      │
+      ▼
+Groq LLM
+      │
+      ▼
 Grounded Answer
 ```
 
-The system is designed to ground the generated answer in retrieved medical knowledge and reduce unsupported responses.
+The system is designed to reduce unsupported answers by grounding the generation process in retrieved medical knowledge.
 
 ---
 
-## 📚 Knowledge Base
+## 📚 Knowledge Base and Data Pipeline
 
-The project uses a curated medical knowledge base based on structured medical information.
-
-The data pipeline includes:
+The project includes a structured ingestion pipeline for processing medical knowledge.
 
 ```text
 Raw Medical Data
-       ↓
+       │
+       ▼
 Data Loading
-       ↓
+       │
+       ▼
 Document Validation
-       ↓
-Document Processing
-       ↓
-Chunking
-       ↓
+       │
+       ▼
+Document Chunking
+       │
+       ▼
 Metadata Processing
-       ↓
+       │
+       ▼
 Embeddings
-       ↓
+       │
+       ▼
 Vector Cache
-       ↓
+       │
+       ▼
 Retrieval System
 ```
 
----
+The ingestion pipeline includes:
 
-## 🗂️ Data Ingestion Pipeline
+- Loading medical knowledge
+- Validating document structure
+- Splitting documents into chunks
+- Processing metadata
+- Preparing data for retrieval
+- Creating vector representations
 
-The ingestion layer is responsible for preparing medical documents for retrieval.
+Relevant files:
 
 ```text
 ingestion/
 ├── load_medlineplus.py
 ├── chunk_documents.py
 ├── inspect_metadata.py
-├── validate_data.py
-└── schema.py
+├── schema.py
+└── validate_data.py
 ```
 
-The pipeline includes:
-
-* 📥 Data Loading
-* 🧹 Data Cleaning
-* ✅ Schema Validation
-* ✂️ Document Chunking
-* 🏷️ Metadata Processing
-* 🧠 Embedding Preparation
-* 💾 Vector Cache Generation
-
 ---
 
-## 🧪 Evaluation Framework
+## 🔎 Retrieval Evaluation
 
-A major focus of this project is building an evaluation-driven RAG system.
+The retrieval layer was evaluated by comparing multiple retrieval strategies to measure their ability to retrieve relevant medical documents.
 
-The system evaluates both:
+The evaluated approaches include:
 
-1. Retrieval Quality
-2. Generation Quality
+- 🔤 Keyword Search
+- 📚 BM25 Search
+- 🧠 Vector Semantic Search
+- 🔀 Hybrid Search
 
----
-
-### 🔎 Retrieval Evaluation
-
-Retrieval evaluation measures whether the system retrieves the correct documents for a given query.
+The evaluation process uses predefined medical queries with expected relevant documents.
 
 ```text
-Evaluation Queries
-        ↓
-Retrieval Pipeline
-        ↓
-Retrieved Documents
-        ↓
-Ground Truth Comparison
-        ↓
-Evaluation Metrics
-        ↓
-Saved Results
+Evaluation Dataset
+        │
+        ▼
+┌───────────────────────┐
+│   Medical Queries     │
+│   + Ground Truth      │
+└───────────┬───────────┘
+            │
+            ▼
+┌─────────────────────────────────────┐
+│        Retrieval Strategies          │
+├─────────────────────────────────────┤
+│  Keyword Search                     │
+│  BM25 Search                        │
+│  Vector Search                      │
+│  Hybrid Search                      │
+└───────────────────┬─────────────────┘
+                    │
+                    ▼
+          Retrieved Documents
+                    │
+                    ▼
+          Evaluation Metrics
 ```
+
+### Retrieval Evaluation Workflow
+
+1. Prepare evaluation queries.
+2. Define ground-truth relevant documents.
+3. Run each retrieval strategy.
+4. Collect retrieved results.
+5. Compare retrieved documents against the ground truth.
+6. Calculate retrieval quality metrics.
+7. Save and analyze the evaluation results.
+
+This makes it possible to compare different retrieval approaches and identify the strongest retrieval strategy for the medical knowledge base.
 
 Relevant files:
 
 ```text
 evaluation/
 ├── create_evaluation_dataset.py
-├── retrieval_evaluation.py
 ├── retrieval_queries.json
+├── retrieval_evaluation.py
 └── retrieval_results.json
 ```
 
-Retrieval evaluation helps analyze:
-
-* Search relevance
-* Retrieval quality
-* Ranking performance
-* Retrieval failures
-
 ---
 
-### 🧠 Generation Evaluation
+## 🧠 LLM Generation Evaluation
 
-The generation pipeline evaluates the quality of the final answers.
+The answer generation component was evaluated to compare different prompting and generation approaches.
+
+The evaluation focuses on:
+
+- 🎯 Answer Relevance
+- 📚 Grounding in Retrieved Context
+- ✅ Factual Correctness
+- 🧩 Answer Completeness
+- 🚫 Reduction of Unsupported Information
+
+Different prompt configurations and generation approaches can be compared to identify the most effective approach for producing grounded medical answers.
 
 ```text
-User Question
-        ↓
-RAG Pipeline
-        ↓
-Generated Answer
-        ↓
-Evaluation
-        ↓
-Quality Metrics
+Retrieved Context
+        │
+        ▼
+┌────────────────────────┐
+│   Prompt Configuration  │
+│   / Generation Approach │
+└────────────┬───────────┘
+             │
+             ▼
+           LLM
+             │
+             ▼
+      Generated Answer
+             │
+             ▼
+      Quality Evaluation
 ```
+
+### Generation Evaluation Workflow
+
+1. Prepare evaluation questions.
+2. Retrieve relevant medical context.
+3. Generate answers using different prompt approaches.
+4. Compare generated answers against expected answers or evaluation criteria.
+5. Analyze answer quality.
+6. Select the most effective generation approach.
+
+This evaluation layer ensures that the system is not only retrieving relevant documents but also generating reliable answers based on the retrieved medical knowledge.
 
 Relevant files:
 
@@ -405,28 +546,39 @@ evaluation/
 └── evaluation_results.json
 ```
 
-The evaluation process helps measure:
+---
 
-* Answer correctness
-* Context relevance
-* Groundedness
-* Answer quality
-* Retrieval-to-generation performance
+## 📊 Evaluation Results
+
+The evaluation results are stored as structured JSON files to make experiments reproducible and easy to analyze.
+
+The evaluation framework supports comparing:
+
+| Component | Compared Approaches |
+|---|---|
+| Retrieval | Keyword Search, BM25, Vector Search, Hybrid Search |
+| Generation | Different prompts and generation approaches |
+| Answer Quality | Relevance, grounding, correctness, completeness |
+
+This evaluation-driven approach helps identify the strongest configuration for the complete RAG pipeline.
 
 ---
 
-## 📊 Monitoring & Observability
+## 📈 Monitoring and Observability
 
-The project includes monitoring and observability capabilities for tracking system behavior.
+The project includes a monitoring layer for tracking application behavior and system performance.
 
-The monitoring layer tracks important information such as:
+The monitoring system tracks:
 
-* 📈 Request Counts
-* ⏱️ Latency
-* 🔎 Retrieval Performance
-* 💬 User Feedback
-* 🧠 System Behavior
-* ⚠️ Errors and Failures
+- 📊 Request Counts
+- ⚡ Request Latency
+- ✅ Success Rates
+- ❌ Failed Requests
+- 🔍 Retrieval Information
+- 👍 User Feedback
+- 🧠 System Behavior
+
+Relevant files:
 
 ```text
 monitoring/
@@ -438,11 +590,58 @@ monitoring/
 
 ---
 
-## 📈 Monitoring Dashboard
+## 📊 Monitoring Dashboard
 
 The project includes an interactive Streamlit monitoring dashboard.
 
-The dashboard provides visibility into application performance and user interactions.
+The dashboard provides visibility into:
+
+- Total Requests
+- Request Success Rate
+- Failed Requests
+- Average Latency
+- Requests Over Time
+- Latency Distribution
+- Request Success vs Failure
+- Retrieved Documents
+- User Feedback
+
+```text
+Application
+     │
+     ▼
+Request Logging
+     │
+     ▼
+Metrics Collection
+     │
+     ▼
+Feedback Tracking
+     │
+     ▼
+Monitoring Dashboard
+```
+
+The dashboard makes it possible to observe system behavior and analyze application performance.
+
+---
+
+## 🖥️ Streamlit Web Application
+
+The main user interface is built with Streamlit.
+
+The application provides:
+
+- 💬 Medical Question Input
+- 🧠 Explanation Level Selection
+- 🔍 Query Rewriting
+- 🧠 Vector Search
+- 📊 Document Reranking
+- 🧩 Context Building
+- 🤖 Grounded Answer Generation
+- 📈 Monitoring Dashboard
+
+Relevant structure:
 
 ```text
 app/
@@ -452,17 +651,44 @@ app/
     └── 2_📊_Monitoring_Dashboard.py
 ```
 
-The dashboard can be used to inspect:
+---
 
-* System Metrics
-* Request Performance
-* Retrieval Behavior
-* User Feedback
-* Application Monitoring Data
+## ⚙️ Workflow Orchestration with Kestra
+
+The project includes workflow orchestration using Kestra.
+
+Kestra is used to define and orchestrate project workflows such as:
+
+- Data Processing
+- Pipeline Execution
+- Evaluation Workflows
+- AI Engineering Tasks
+
+The orchestration configuration is located in:
+
+```text
+orchestration/
+└── docker-compose.yml
+```
 
 ---
 
-## 🧱 Project Structure
+## 🐳 Containerization
+
+The project supports Docker-based deployment.
+
+Docker helps provide a reproducible environment for running the application.
+
+```text
+Dockerfile
+requirements.docker.txt
+```
+
+The application can be built and executed inside a Docker container.
+
+---
+
+## 📁 Project Structure
 
 ```text
 Medical-Knowledge-AI/
@@ -472,6 +698,9 @@ Medical-Knowledge-AI/
 │   ├── style.css
 │   └── pages/
 │       └── 2_📊_Monitoring_Dashboard.py
+│
+├── assets/
+│   └── medical-knowledge-ai-demo.mp4
 │
 ├── data/
 │   ├── raw/
@@ -532,61 +761,105 @@ Medical-Knowledge-AI/
 
 ### Programming
 
-* Python
-* NumPy
-* JSON
-* XML
+- Python 3.11+
 
-### Generative AI
+### AI and LLM
 
-* Large Language Models
-* Groq LLM
-* Prompt Engineering
-* Retrieval-Augmented Generation
+- Large Language Models
+- Retrieval-Augmented Generation
+- Generative AI
+- Groq LLM
+- Prompt Engineering
 
 ### Information Retrieval
 
-* BM25
-* Keyword Search
-* Vector Search
-* Embeddings
-* Hybrid Retrieval
-* Reranking
+- Keyword Search
+- BM25
+- Vector Search
+- Embeddings
+- Hybrid Search
+- Document Reranking
+- Query Rewriting
 
 ### Data Processing
 
-* Document Loading
-* XML Processing
-* Document Chunking
-* Metadata Processing
-* Data Validation
+- Python
+- NumPy
+- JSON
+- XML
+- Document Chunking
+- Metadata Processing
 
 ### Evaluation
 
-* Retrieval Evaluation
-* Generation Evaluation
-* Ground Truth Datasets
-* Automated Evaluation Pipelines
-* Evaluation Metrics
+- Retrieval Evaluation
+- Generation Evaluation
+- Ground-Truth Datasets
+- Evaluation Pipelines
+- Structured Evaluation Results
 
 ### Monitoring
 
-* Request Logging
-* Metrics Collection
-* User Feedback
-* Application Monitoring
-* Interactive Dashboards
+- Request Logging
+- Metrics Collection
+- Latency Tracking
+- Success Rate Monitoring
+- User Feedback
+- Streamlit Monitoring Dashboard
 
-### Deployment
+### Deployment and Infrastructure
 
-* Docker
-* Docker Compose
-* Containerized Services
-* Workflow Orchestration
+- Docker
+- Docker Compose
+- Containerized Services
+- Kestra Workflow Orchestration
 
 ### Interface
 
-* Streamlit
+- Streamlit
+- Interactive Web Application
+
+---
+
+## 🏆 Best Practices
+
+This project applies several modern AI Engineering best practices.
+
+### 🔀 Hybrid Retrieval
+
+Combines lexical retrieval using BM25 with semantic vector search to improve recall and handle both exact medical terminology and semantic variations.
+
+### 🎯 Document Reranking
+
+Retrieved candidates are reranked before being passed to the LLM to improve context relevance.
+
+### 🧩 Query Rewriting
+
+User queries can be transformed into improved search queries to increase retrieval quality.
+
+### 📊 Evaluation-Driven Development
+
+Both retrieval quality and LLM generation quality are evaluated instead of relying only on manual testing.
+
+### 📈 Observability
+
+The system tracks request behavior, latency, success rates, retrieval information, and user feedback.
+
+### 🧪 Reproducibility
+
+The project includes structured datasets, evaluation scripts, saved results, dependency files, and Docker configuration.
+
+### 🧱 Modular Architecture
+
+Each major component has a clear responsibility:
+
+- Ingestion
+- Retrieval
+- Reranking
+- RAG Generation
+- Evaluation
+- Monitoring
+- Application Interface
 
 ---
 
@@ -599,13 +872,11 @@ git clone https://github.com/Ai-MAFlutter/Medical-Knowledge-AI.git
 cd Medical-Knowledge-AI
 ```
 
----
-
 ### 2. Create a Virtual Environment
 
 #### Windows
 
-```powershell
+```bash
 python -m venv .venv
 .venv\Scripts\activate
 ```
@@ -616,8 +887,6 @@ python -m venv .venv
 python3 -m venv .venv
 source .venv/bin/activate
 ```
-
----
 
 ### 3. Install Dependencies
 
@@ -641,22 +910,13 @@ Create a `.env` file in the project root:
 GROQ_API_KEY=your_api_key_here
 ```
 
-Never commit your `.env` file or API keys to GitHub.
-
-Make sure your `.gitignore` includes:
-
-```text
-.venv/
-.env
-__pycache__/
-*.pyc
-```
+⚠️ Never commit your `.env` file or API keys to GitHub.
 
 ---
 
 ## ▶️ Running the Application
 
-Start the Streamlit application:
+Run the Streamlit application:
 
 ```bash
 streamlit run app/app.py
@@ -670,15 +930,15 @@ http://localhost:8501
 
 ---
 
-## 🐳 Docker Deployment
+## 🐳 Docker
 
-### Build the Docker Image
+Build the Docker image:
 
 ```bash
 docker build -t medical-knowledge-ai .
 ```
 
-### Run the Container
+Run the container:
 
 ```bash
 docker run -p 8501:8501 medical-knowledge-ai
@@ -688,9 +948,7 @@ docker run -p 8501:8501 medical-knowledge-ai
 
 ## ⚙️ Docker Compose
 
-The project also includes orchestration configuration.
-
-Start the services:
+Run the orchestration configuration:
 
 ```bash
 docker compose -f orchestration/docker-compose.yml up --build
@@ -742,53 +1000,22 @@ python evaluate.py
 
 ---
 
-## 🧩 Engineering Principles
-
-This project follows modern AI engineering principles:
-
-### ✅ Modular Architecture
-
-Each component has a clear responsibility and can be developed and tested independently.
-
-### ✅ Retrieval First
-
-The LLM does not operate alone. Relevant context is retrieved before generation.
-
-### ✅ Evaluation Driven
-
-System quality is measured using structured evaluation pipelines.
-
-### ✅ Observable
-
-System behavior can be monitored and analyzed through logs and metrics.
-
-### ✅ Reproducible
-
-The project includes structured data, evaluation results, and configuration files.
-
-### ✅ Production Oriented
-
-The system is designed with deployment, monitoring, testing, and maintainability in mind.
-
----
-
 ## 🗺️ Future Improvements
 
 Potential future improvements include:
 
-* 🔬 Advanced Cross-Encoder Reranking
-* 📚 Medical Answer Citations
-* 🧠 Improved Hallucination Detection
-* 💬 Conversation Memory
-* 🔐 User Authentication
-* ☁️ Cloud Deployment
-* 🔄 Automated CI/CD Pipeline
-* 🔍 Advanced Distributed Tracing
-* 🧪 A/B Testing for Retrieval Strategies
-* 📈 Continuous Evaluation
-* 🗄️ Production Vector Database Integration
-* 📊 Advanced Analytics
-* ⚡ API Performance Optimization
+- 🔬 Advanced Cross-Encoder Reranking
+- 📊 Improved Retrieval Metrics
+- 🧠 Better Hallucination Detection
+- 📚 Medical Answer Citations
+- 💬 Conversation Memory
+- 🔐 User Authentication
+- ☁️ Cloud Deployment
+- 🔄 Automated CI/CD Pipeline
+- 🔍 Advanced Tracing
+- 🧪 A/B Testing for Retrieval Strategies
+- ♻️ Continuous Evaluation
+- 🗄️ Production Database Integration
 
 ---
 
@@ -796,7 +1023,7 @@ Potential future improvements include:
 
 This project is intended for educational and research purposes only.
 
-It is **not a replacement for professional medical advice, diagnosis, or treatment**.
+It is not a replacement for professional medical advice, diagnosis, or treatment.
 
 Always consult a qualified healthcare professional for medical decisions.
 
@@ -804,18 +1031,20 @@ Always consult a qualified healthcare professional for medical decisions.
 
 ## 👩‍💻 Author
 
-### Marina Wahid
+**Marina Wahid**
 
-**Artificial Intelligence Developer | Generative AI | RAG | Machine Learning | Flutter Developer**
+Artificial Intelligence Developer | Generative AI | RAG | Machine Learning | Flutter Developer
 
 Building intelligent applications using:
 
-* 🤖 Generative AI
-* 🧠 Large Language Models
-* 🔍 Retrieval-Augmented Generation
-* 📊 Machine Learning
-* 🐍 Python
-* 📱 Flutter
+- 🤖 Generative AI
+- 🧠 Large Language Models
+- 🔍 Retrieval-Augmented Generation
+- 📊 Machine Learning
+- 🔎 Information Retrieval
+- 📈 Monitoring and Observability
+- 🐍 Python
+- 📱 Flutter
 
 ---
 
@@ -824,4 +1053,3 @@ Building intelligent applications using:
 ⭐ If you find this project useful, consider giving it a star!
 
 </p>
-```
