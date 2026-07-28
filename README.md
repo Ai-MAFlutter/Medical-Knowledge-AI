@@ -32,6 +32,30 @@ Built with hybrid retrieval, vector search, reranking, evaluation, monitoring, w
 
 Instead of relying only on an LLM, the system retrieves relevant information from a curated medical knowledge base before generating the final answer.
 
+## 🩺 Problem
+
+Medical information is scattered across multiple trusted sources, making it difficult to retrieve accurate and reliable answers quickly. Traditional LLMs may generate hallucinated responses because they rely only on their pretrained knowledge without grounding answers in verified medical documents.
+
+---
+
+## 💡 Solution
+
+Medical Knowledge AI is an end-to-end Retrieval-Augmented Generation (RAG) system that combines semantic retrieval with Large Language Models to generate grounded medical answers.
+
+The system:
+
+- Retrieves relevant medical documents using Hybrid Search (BM25 + Vector Search)
+- Rewrites user queries for better retrieval
+- Reranks retrieved documents
+- Generates grounded responses using an LLM
+- Evaluates retrieval and generation quality
+- Monitors system performance through dashboards
+- Provides a REST API using FastAPI
+- Runs inside Docker for reproducible deployment
+
+---
+
+
 ### Key Features
 
 - 🔎 Keyword Search
