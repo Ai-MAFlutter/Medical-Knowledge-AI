@@ -21,40 +21,43 @@
 </p>
 
 <p align="center">
-Built with hybrid retrieval, vector search, reranking, evaluation, monitoring, workflow orchestration, and containerized deployment.
+Built with Hybrid Retrieval, Vector Search, Document Reranking, Evaluation, Monitoring, Streamlit, Kestra Workflow Orchestration, FastAPI, and Docker.
 </p>
 
 ---
 
 ## 🚀 Overview
 
-**Medical Knowledge AI** is an AI Engineering project that retrieves relevant medical knowledge and generates grounded answers using a complete RAG pipeline.
+**Medical Knowledge AI** is an AI Engineering project that retrieves reliable medical knowledge and generates grounded answers using a complete Retrieval-Augmented Generation (RAG) pipeline.
 
-Instead of relying only on an LLM, the system retrieves relevant information from a curated medical knowledge base before generating the final answer.
+Instead of relying solely on a Large Language Model, the system first retrieves relevant information from a curated medical knowledge base and then generates answers grounded in retrieved evidence. This approach improves answer reliability while reducing hallucinations.
+
+---
 
 ## 🩺 Problem
 
-Medical information is scattered across multiple trusted sources, making it difficult to retrieve accurate and reliable answers quickly. Traditional LLMs may generate hallucinated responses because they rely only on their pretrained knowledge without grounding answers in verified medical documents.
+Medical knowledge is distributed across multiple trusted sources, making it difficult to retrieve accurate and reliable information efficiently.
+
+Traditional Large Language Models may generate hallucinated or unsupported responses because they rely only on pretrained knowledge rather than verified medical documents.
 
 ---
 
 ## 💡 Solution
 
-Medical Knowledge AI is an end-to-end Retrieval-Augmented Generation (RAG) system that combines semantic retrieval with Large Language Models to generate grounded medical answers.
+Medical Knowledge AI addresses this challenge through an end-to-end Retrieval-Augmented Generation (RAG) pipeline that combines lexical retrieval, semantic search, document reranking, and Large Language Models to generate grounded medical answers.
 
 The system:
 
-- Retrieves relevant medical documents using Hybrid Search (BM25 + Vector Search)
-- Rewrites user queries for better retrieval
-- Reranks retrieved documents
-- Generates grounded responses using an LLM
-- Evaluates retrieval and generation quality
-- Monitors system performance through dashboards
+- Retrieves relevant medical documents using **Hybrid Search (Keyword Search + BM25 + Vector Search)**
+- Rewrites user queries to improve retrieval quality
+- Reranks retrieved documents before answer generation
+- Generates grounded responses using retrieved medical context
+- Evaluates both retrieval quality and LLM generation quality
+- Monitors system performance through interactive dashboards
 - Provides a REST API using FastAPI
-- Runs inside Docker for reproducible deployment
+- Supports reproducible deployment using Docker
 
 ---
-
 
 ### Key Features
 
